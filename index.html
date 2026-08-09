@@ -229,10 +229,12 @@ const generalTalk = {
   "お休みになる前に、何かご用意するものはございますか。"
 ]
 };
- const talkHistory = {
+const talkHistory = {
   normal: [],
   sleep: []
-};   
+};
+
+let lastTalkMessage = "";
     
 function getRandomTalkMessage() {
   let messages;
@@ -257,21 +259,35 @@ function getRandomTalkMessage() {
 
   let history = talkHistory[historyKey];
 
-  // 使い切ったら、そのプールの履歴をリセット
   if (history.length >= messages.length) {
     talkHistory[historyKey] = [];
     history = talkHistory[historyKey];
   }
 
-  // まだ使っていないセリフだけ集める
-  const available = messages.filter(
+  let available = messages.filter(
     (message) => !history.includes(message)
   );
+
+  // 直前と同じセリフも除外
+  available = available.filter(
+    (message) => message !== lastTalkMessage
+  );
+
+  // 候補がなくなった場合は、履歴だけリセットして再抽選
+  if (available.length === 0) {
+    talkHistory[historyKey] = [];
+    history = talkHistory[historyKey];
+
+    available = messages.filter(
+      (message) => message !== lastTalkMessage
+    );
+  }
 
   const index = Math.floor(Math.random() * available.length);
   const selected = available[index];
 
   history.push(selected);
+  lastTalkMessage = selected;
 
   return selected;
 }

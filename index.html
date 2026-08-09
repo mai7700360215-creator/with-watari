@@ -175,7 +175,6 @@ const generalTalk = {
   ]
 };
     
-let lastSpokenMessage = "";
     
 function getRandomTalkMessage() {
   const period = getTimePeriod();
@@ -184,16 +183,9 @@ function getRandomTalkMessage() {
     ? generalTalk[period]
     : generalTalk.neutral;
 
-let message;
-
-do {
   const index = Math.floor(Math.random() * messages.length);
-  message = messages[index];
-} while (messages.length > 1 && message === lastSpokenMessage);
 
-lastSpokenMessage = message;
-
-return message;
+  return messages[index];
 }
 
   // 残りは時間に関係ない通常セリフ

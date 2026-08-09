@@ -176,7 +176,7 @@
   <button id="conversationButton">話しかける</button>
   <div id="conversationMenu" class="conversation-menu">
 <button id="teaButton">☕ ティータイム</button>
-  <button>💬 いま何してた？</button>
+<button id="whatButton">💬 いま何してた？</button>
   <button>👀 Lの様子</button>
   <button>🎩 ワタリの話</button>
   <button>👏 ほめる</button>
@@ -217,6 +217,17 @@ teaButton.addEventListener("click", () => {
 
   message.textContent = messages[index];
 });
+
+    const whatButton = document.getElementById("whatButton");
+
+whatButton.addEventListener("click", () => {
+  const messages = conversationTalk.what;
+  const index = Math.floor(Math.random() * messages.length);
+
+  message.textContent = messages[index];
+});
+
+    
     
 conversationButton.addEventListener("click", () => {
   if (conversationMenu.style.display === "grid") {
@@ -303,6 +314,12 @@ const conversationTalk = {
     "お茶をお淹れしましょうか。",
     "本日はどのお茶になさいますか。",
     "少し休憩なさってはいかがですか。"
+  ],
+
+  what: [
+    "お戻りになるまで、こちらで待機しておりました。",
+    "特に変わったことはございません。いつも通りでございます。",
+    "L様の様子を確認しておりました。"
   ]
 };
     

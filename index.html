@@ -229,25 +229,51 @@ const generalTalk = {
   "お休みになる前に、何かご用意するものはございますか。"
 ]
 };
-    
+ const talkHistory = {
+  normal: [],
+  sleep: []
+};   
     
 function getRandomTalkMessage() {
-  if (currentMode === "sleep") {
-    const messages = generalTalk.sleep;
-    const index = Math.floor(Math.random() * messages.length);
+  let messages;
+  let historyKey;
 
-    return messages[index];
+  if (currentMode === "sleep") {
+    messages = generalTalk.sleep;
+    historyKey = "sleep";
+  } else {
+    const period = getTimePeriod();
+
+    messages = Math.random() < 0.6
+      ? generalTalk[period]
+      : generalTalk.neutral;
+
+    historyKey = "normal";
   }
 
-  const period = getTimePeriod();
+  if (!Array.isArray(messages) || messages.length === 0) {
+    return "";
+  }
 
-  const messages = Math.random() < 0.6
-    ? generalTalk[period]
-    : generalTalk.neutral;
+  let history = talkHistory[historyKey];
 
-  const index = Math.floor(Math.random() * messages.length);
+  // 使い切ったら、そのプールの履歴をリセット
+  if (history.length >= messages.length) {
+    talkHistory[historyKey] = [];
+    history = talkHistory[historyKey];
+  }
 
-  return messages[index];
+  // まだ使っていないセリフだけ集める
+  const available = messages.filter(
+    (message) => !history.includes(message)
+  );
+
+  const index = Math.floor(Math.random() * available.length);
+  const selected = available[index];
+
+  history.push(selected);
+
+  return selected;
 }
 
 

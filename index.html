@@ -248,9 +248,9 @@ const time = now.toLocaleTimeString("ja-JP", {
       clock.textContent = time;
     }
 
-    talkButton.addEventListener("click", () => {
-      message.textContent = getRandomMessage();
-    });
+talkButton.addEventListener("click", () => {
+  message.textContent = getRandomTalkMessage();
+});
 
     updateClock();
     setInterval(updateClock, 1000);

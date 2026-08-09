@@ -37,16 +37,22 @@
       margin-bottom: 30px;
     }
 
-    .watari {
-      width: 220px;
-      height: 300px;
-      margin: 0 auto 25px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid #444;
-      color: #777;
-    }
+.watari {
+  width: 220px;
+  height: 300px;
+  margin: 0 auto 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid #444;
+}
+
+.watari img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
 
     .watari-placeholder {
       font-size: 14px;
@@ -89,11 +95,9 @@
       PRIVATE COMPANION TERMINAL
     </div>
 
-    <div class="watari">
-      <div class="watari-placeholder">
-        WATARI
-      </div>
-    </div>
+<div class="watari">
+  <img src="watari.png" alt="ワタリ">
+</div>
 
     <div id="message" class="message">
       お帰りなさいませ。

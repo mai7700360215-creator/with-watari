@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>with Watari</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #111;
+      color: #eee;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .terminal {
+      width: min(92vw, 700px);
+      min-height: 80vh;
+      padding: 30px;
+      border: 1px solid #555;
+      background: #181818;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: #888;
+      margin-bottom: 30px;
+    }
+
+    .watari {
+      width: 220px;
+      height: 300px;
+      margin: 0 auto 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #444;
+      color: #777;
+    }
+
+    .watari-placeholder {
+      font-size: 14px;
+    }
+
+    .message {
+      min-height: 80px;
+      padding: 20px;
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    .talk-button {
+      margin-top: 15px;
+      padding: 12px 35px;
+      background: transparent;
+      color: #eee;
+      border: 1px solid #777;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .talk-button:hover {
+      background: #333;
+    }
+
+    .clock {
+      margin-top: 25px;
+      color: #888;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="terminal">
+
+    <div class="title">
+      PRIVATE COMPANION TERMINAL
+    </div>
+
+    <div class="watari">
+      <div class="watari-placeholder">
+        WATARI
+      </div>
+    </div>
+
+    <div id="message" class="message">
+      お帰りなさいませ。
+    </div>
+
+    <button id="talkButton" class="talk-button">
+      TALK
+    </button>
+
+    <div id="clock" class="clock"></div>
+
+  </main>
+
+  <script>
+    const message = document.getElementById("message");
+    const talkButton = document.getElementById("talkButton");
+    const clock = document.getElementById("clock");
+
+    const messages = [
+      "お帰りなさいませ。",
+      "今日はどのようにお過ごしでしたか。",
+      "何かお手伝いできることがあれば、お申し付けください。",
+      "どうぞご無理はなさらないでくださいね。"
+    ];
+
+    function getRandomMessage() {
+      const index = Math.floor(Math.random() * messages.length);
+      return messages[index];
+    }
+
+    function updateClock() {
+      const now = new Date();
+
+      const time = now.toLocaleTimeString("ja-JP", {
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+
+      clock.textContent = time;
+    }
+
+    talkButton.addEventListener("click", () => {
+      message.textContent = getRandomMessage();
+    });
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+
+</body>
+</html>

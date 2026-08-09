@@ -24,6 +24,8 @@
     }
 .conversation-menu {
   display: none;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
 }
 .terminal {
   width: min(92vw, 700px);
@@ -204,7 +206,16 @@
 const weatherButton = document.getElementById("weatherButton");
 const weather = document.getElementById("weather");
 const modeSelect = document.getElementById("modeSelect");
+const conversationButton = document.getElementById("conversationButton");
+const conversationMenu = document.getElementById("conversationMenu");
 
+conversationButton.addEventListener("click", () => {
+  if (conversationMenu.style.display === "grid") {
+    conversationMenu.style.display = "none";
+  } else {
+    conversationMenu.style.display = "grid";
+  }
+});
 let currentMode = "normal";
 
 modeSelect.addEventListener("change", () => {

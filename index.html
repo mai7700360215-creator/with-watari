@@ -221,11 +221,24 @@ const generalTalk = {
   neutral: [
     "何かお手伝いできることがあれば、お申し付けください。",
     "どうぞご無理はなさらないでくださいね。"
-  ]
+  ],
+  
+  sleep: [
+  "そろそろお休みになる時間です。",
+  "明日に備えて、どうぞゆっくりお休みください。",
+  "お休みになる前に、何かご用意するものはございますか。"
+]
 };
     
     
 function getRandomTalkMessage() {
+  if (currentMode === "sleep") {
+    const messages = generalTalk.sleep;
+    const index = Math.floor(Math.random() * messages.length);
+
+    return messages[index];
+  }
+
   const period = getTimePeriod();
 
   const messages = Math.random() < 0.6

@@ -188,12 +188,7 @@ function getRandomTalkMessage() {
   return messages[index];
 }
 
-  // 残りは時間に関係ない通常セリフ
-  return takeRandom(
-    "general-neutral",
-    generalTalk.neutral
-  );
-}    
+
 
     function updateClock() {
       const now = new Date();

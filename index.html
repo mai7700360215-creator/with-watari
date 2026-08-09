@@ -92,27 +92,24 @@
   font-size: 18px;
   letter-spacing: 2px;
 }
-    .mode-area {
+.mode-area {
   margin-top: 20px;
 }
 
 .mode-label {
   margin-bottom: 8px;
   color: #888;
-  font-size: 12px;
+  font-size: 10px;
+  letter-spacing: 2px;
 }
 
-.mode-button {
-  padding: 8px 18px;
-  background: transparent;
+.mode-select {
+  padding: 8px 14px;
+  background: #111;
   color: #aaa;
   border: 1px solid #555;
-  cursor: pointer;
   font-size: 12px;
-}
-
-.mode-button:hover {
-  background: #292929;
+  cursor: pointer;
 }
   </style>
 </head>
@@ -132,13 +129,17 @@
 <div id="message" class="message"></div>
 
 <div class="mode-area">
-  <div id="modeLabel" class="mode-label">
-    通常モード
+  <div class="mode-label">
+    MODE
   </div>
 
-  <button id="modeButton" class="mode-button">
-    おやすみモードにする
-  </button>
+  <select id="modeSelect" class="mode-select">
+    <option value="normal">通常</option>
+    <option value="sleep">おやすみ</option>
+    <option value="return">帰宅</option>
+    <option value="meal">食事</option>
+    <option value="outing">外出</option>
+  </select>
 </div>
 
 <button id="talkButton" class="talk-button">
@@ -155,21 +156,12 @@
     const talkButton = document.getElementById("talkButton");
     const clock = document.getElementById("clock");
 
-    const modeButton = document.getElementById("modeButton");
-const modeLabel = document.getElementById("modeLabel");
+const modeSelect = document.getElementById("modeSelect");
 
 let currentMode = "normal";
 
-    modeButton.addEventListener("click", () => {
-  if (currentMode === "normal") {
-    currentMode = "sleep";
-    modeLabel.textContent = "🌙 おやすみモード";
-    modeButton.textContent = "通常モードにする";
-  } else {
-    currentMode = "normal";
-    modeLabel.textContent = "通常モード";
-    modeButton.textContent = "おやすみモードにする";
-  }
+modeSelect.addEventListener("change", () => {
+  currentMode = modeSelect.value;
 });
     
     function getTimePeriod() {

@@ -117,6 +117,29 @@
   letter-spacing: 0.12em;
   font-weight: 300;
 }
+    .weather-panel {
+  margin: 18px auto 0;
+  padding: 14px 18px;
+  width: min(88vw, 420px);
+  border: 1px solid #444;
+  background: #202020;
+  text-align: left;
+}
+
+.weather-title {
+  margin-bottom: 10px;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  color: #777;
+  text-align: center;
+}
+
+#weather {
+  font-size: 12px;
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  color: #bbb;
+}
   </style>
 </head>
 
@@ -152,7 +175,10 @@
   TALK
 </button>
 <button id="weatherButton">WEATHER</button>
-<div id="weather"></div>
+<div class="weather-panel">
+  <div class="weather-title">WEATHER REPORT</div>
+  <div id="weather"></div>
+</div>
     
     <div class="clock-label">CURRENT TIME</div>
 <div id="clock" class="clock"></div>
@@ -382,10 +408,12 @@ let currentIndex = hourlyTime.findIndex((time) => {
       rainMessage = "しばらく雨の心配はなさそうです。";
     }
 
-    weather.textContent =
-      `現在は${currentWeather}、気温は${currentTemperature}℃です。` +
-      `降水確率は${currentRain}%です。` +
-      rainMessage;
+const currentIcon = getWeatherIcon(hourlyWeather[currentIndex]);
+
+weather.textContent =
+  `${currentIcon} 現在は${currentWeather}、気温は${currentTemperature}℃です。` +
+  `降水確率は${currentRain}%です。` +
+  rainMessage;
 
   } catch (error) {
     weather.textContent =
@@ -412,6 +440,19 @@ function getWeatherText(code) {
 weatherButton.addEventListener("click", () => {
   getWeather();
 });
+    function getWeatherIcon(code) {
+  if (code === 0) return "☀️";
+  if ([1, 2, 3].includes(code)) return "☁️";
+  if ([45, 48].includes(code)) return "🌫️";
+  if ([51, 53, 55, 56, 57].includes(code)) return "🌧️";
+  if ([61, 63, 65, 66, 67].includes(code)) return "☔";
+  if ([71, 73, 75, 77].includes(code)) return "❄️";
+  if ([80, 81, 82].includes(code)) return "🌦️";
+  if ([85, 86].includes(code)) return "🌨️";
+  if ([95, 96, 99].includes(code)) return "⛈️";
+
+  return "🌤️";
+}
   </script>
 
 </body>

@@ -174,7 +174,9 @@ const generalTalk = {
     "どうぞご無理はなさらないでくださいね。"
   ]
 };
-
+    
+let lastSpokenMessage = "";
+    
 function getRandomTalkMessage() {
   const period = getTimePeriod();
 
@@ -182,9 +184,16 @@ function getRandomTalkMessage() {
     ? generalTalk[period]
     : generalTalk.neutral;
 
-  const index = Math.floor(Math.random() * messages.length);
+let message;
 
-  return messages[index];
+do {
+  const index = Math.floor(Math.random() * messages.length);
+  message = messages[index];
+} while (messages.length > 1 && message === lastSpokenMessage);
+
+lastSpokenMessage = message;
+
+return message;
 }
 
   // 残りは時間に関係ない通常セリフ

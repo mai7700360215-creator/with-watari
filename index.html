@@ -22,7 +22,9 @@
       justify-content: center;
       align-items: center;
     }
-
+.conversation-menu {
+  display: none;
+}
 .terminal {
   width: min(92vw, 700px);
   min-height: 80vh;
@@ -169,6 +171,16 @@
     <option value="meal">食事</option>
     <option value="outing">外出</option>
   </select>
+  <button id="conversationButton">話しかける</button>
+  <div id="conversationMenu" class="conversation-menu">
+  <button>☕ ティータイム</button>
+  <button>💬 いま何してた？</button>
+  <button>👀 Lの様子</button>
+  <button>🎩 ワタリの話</button>
+  <button>👏 ほめる</button>
+  <button>🎲 あそぶ</button>
+  <button>⌨️ 集中する</button>
+</div>
 </div>
 
 <button id="talkButton" class="talk-button">

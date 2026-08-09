@@ -92,6 +92,28 @@
   font-size: 18px;
   letter-spacing: 2px;
 }
+    .mode-area {
+  margin-top: 20px;
+}
+
+.mode-label {
+  margin-bottom: 8px;
+  color: #888;
+  font-size: 12px;
+}
+
+.mode-button {
+  padding: 8px 18px;
+  background: transparent;
+  color: #aaa;
+  border: 1px solid #555;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.mode-button:hover {
+  background: #292929;
+}
   </style>
 </head>
 
@@ -109,9 +131,19 @@
 
 <div id="message" class="message"></div>
 
-    <button id="talkButton" class="talk-button">
-      TALK
-    </button>
+<div class="mode-area">
+  <div id="modeLabel" class="mode-label">
+    通常モード
+  </div>
+
+  <button id="modeButton" class="mode-button">
+    おやすみモードにする
+  </button>
+</div>
+
+<button id="talkButton" class="talk-button">
+  TALK
+</button>
 
     <div class="clock-label">CURRENT TIME</div>
 <div id="clock" class="clock"></div>

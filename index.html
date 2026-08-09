@@ -219,6 +219,12 @@ const generalTalk = {
   "そろそろお休みになる時間です。",
   "明日に備えて、どうぞゆっくりお休みください。",
   "お休みになる前に、何かご用意するものはございますか。"
+],
+  return: [
+  "お帰りなさいませ。",
+  "お待ちしておりました。",
+  "お疲れのところ、お帰りいただきありがとうございます。",
+  "お食事の準備はいかがいたしましょうか。"
 ]
 };
 const talkHistory = {
@@ -232,9 +238,13 @@ function getRandomTalkMessage() {
   let messages;
   let historyKey;
 
-  if (currentMode === "sleep") {
-    messages = generalTalk.sleep;
-    historyKey = "sleep";
+if (currentMode === "sleep") {
+  messages = generalTalk.sleep;
+  historyKey = "sleep";
+
+} else if (currentMode === "return") {
+  messages = generalTalk.return;
+  historyKey = "return";
   } else {
     const period = getTimePeriod();
 

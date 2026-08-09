@@ -107,9 +107,7 @@
   <img src="watari.png" alt="ワタリ">
 </div>
 
-    <div id="message" class="message">
-      お帰りなさいませ。
-    </div>
+<div id="message" class="message"></div>
 
     <button id="talkButton" class="talk-button">
       TALK
@@ -125,6 +123,32 @@
     const talkButton = document.getElementById("talkButton");
     const clock = document.getElementById("clock");
 
+    function getTimePeriod() {
+  const hour = new Date().getHours();
+
+  if (hour >= 5 && hour < 11) return "morning";
+  if (hour >= 11 && hour < 17) return "daytime";
+  if (hour >= 17 && hour < 23) return "evening";
+  return "lateNight";
+}
+
+function getGreeting() {
+  const period = getTimePeriod();
+
+  if (period === "morning") {
+    return "おはようございます。";
+  }
+
+  if (period === "daytime") {
+    return "こんにちは。";
+  }
+
+  if (period === "evening") {
+    return "お疲れさまでした。";
+  }
+
+  return "まだお休みではなかったのですね。";
+}
     const messages = [
       "お帰りなさいませ。",
       "今日はどのようにお過ごしでしたか。",
@@ -155,6 +179,7 @@ const time = now.toLocaleTimeString("ja-JP", {
 
     updateClock();
     setInterval(updateClock, 1000);
+    message.textContent = getGreeting();
   </script>
 
 </body>

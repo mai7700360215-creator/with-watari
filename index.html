@@ -160,10 +160,8 @@ const generalTalk = {
   ],
 
   evening: [
-      "本日もお疲れさまでした。",
-  "そろそろお休みになる準備をなさってはいかがですか。",
-  "温かいお飲み物でもご用意しましょうか。",
-  "今日は随分頑張っていらっしゃいましたね。"
+    "本日もお疲れさまでした。",
+    "そろそろお休みになる準備をなさってはいかがですか。"
   ],
 
   lateNight: [
@@ -177,57 +175,17 @@ const generalTalk = {
   ]
 };
 
-const randomBags = new Map();
-let lastSpokenMessage = "";
-
-function shuffle(messages) {
-  const array = [...messages];
-
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-
-  return array;
-}
-
-function takeRandom(poolKey, messages) {
-  if (!Array.isArray(messages) || messages.length === 0) {
-    return "";
-  }
-
-  let bag = randomBags.get(poolKey);
-
-  if (!bag || bag.length === 0) {
-    bag = shuffle(messages);
-
-    if (
-      bag.length > 1 &&
-      bag[bag.length - 1] === lastSpokenMessage
-    ) {
-      [bag[bag.length - 1], bag[bag.length - 2]] =
-        [bag[bag.length - 2], bag[bag.length - 1]];
-    }
-
-    randomBags.set(poolKey, bag);
-  }
-
-  const message = bag.pop();
-  lastSpokenMessage = message;
-
-  return message;
-}
-
 function getRandomTalkMessage() {
   const period = getTimePeriod();
 
-  // 60%は現在の時間帯に合ったセリフ
-  if (Math.random() < 0.6) {
-    return takeRandom(
-      `general-${period}`,
-      generalTalk[period]
-    );
-  }
+  const messages = Math.random() < 0.6
+    ? generalTalk[period]
+    : generalTalk.neutral;
+
+  const index = Math.floor(Math.random() * messages.length);
+
+  return messages[index];
+}
 
   // 残りは時間に関係ない通常セリフ
   return takeRandom(

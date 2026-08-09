@@ -155,6 +155,23 @@
     const talkButton = document.getElementById("talkButton");
     const clock = document.getElementById("clock");
 
+    const modeButton = document.getElementById("modeButton");
+const modeLabel = document.getElementById("modeLabel");
+
+let currentMode = "normal";
+
+    modeButton.addEventListener("click", () => {
+  if (currentMode === "normal") {
+    currentMode = "sleep";
+    modeLabel.textContent = "🌙 おやすみモード";
+    modeButton.textContent = "通常モードにする";
+  } else {
+    currentMode = "normal";
+    modeLabel.textContent = "通常モード";
+    modeButton.textContent = "おやすみモードにする";
+  }
+});
+    
     function getTimePeriod() {
   const hour = new Date().getHours();
 

@@ -663,7 +663,7 @@ function showMessage(text) {
       messageTimer = null;
 
       // 長めのセリフだけ「続き」を表示
-      if (text.length >= 45) {
+      if (text.length >= 10) {
         const arrow = document.createElement("span");
         arrow.className = "continue-arrow";
         arrow.textContent = " ▶";

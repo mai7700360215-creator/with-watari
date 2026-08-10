@@ -651,10 +651,8 @@ let messageTimer = null;
 let messageTimer = null;
 let currentConversation = null;
 let currentPage = 0;
-let currentOnComplete = null;
 
 function showMessage(text, onComplete = null) {
-  // 前のセリフ表示を停止
   if (messageTimer) {
     clearTimeout(messageTimer);
     messageTimer = null;
@@ -674,32 +672,35 @@ function showMessage(text, onComplete = null) {
 
       const delay = 20 + Math.random() * 25;
       messageTimer = setTimeout(showNext, delay);
+      return;
+    }
 
-    } else {
-      messageTimer = null;
+    messageTimer = null;
 
-      // ▶を表示
-      if (currentOnComplete) {
-        const arrow = document.createElement("span");
-        arrow.className = "continue-arrow";
-        arrow.textContent = " ▶";
-        message.appendChild(arrow);
+    // 次のページがある場合
+    if (onComplete) {
+      const arrow = document.createElement("span");
+      arrow.className = "continue-arrow";
+      arrow.textContent = " ▶";
+      message.appendChild(arrow);
 
-        message.style.cursor = "pointer";
+      message.style.cursor = "pointer";
 
-        message.onclick = () => {
-          message.onclick = null;
-          message.style.cursor = "default";
+      message.onclick = () => {
+        message.onclick = null;
+        message.style.cursor = "default";
+        onComplete();
+      };
 
-          const next = currentOnComplete;
-          currentOnComplete = null;
-          next();
-        };
-      }
+    // 普通の長いセリフの場合
+    } else if (text.length >= 45) {
+      const arrow = document.createElement("span");
+      arrow.className = "continue-arrow";
+      arrow.textContent = " ▶";
+      message.appendChild(arrow);
     }
   }
 
-  currentOnComplete = onComplete;
   showNext();
 }
 
@@ -713,15 +714,12 @@ function startConversation(pages) {
 function showConversationPage() {
   const text = currentConversation[currentPage];
 
-  const hasNextPage = currentPage < currentConversation.length - 1;
-
-  if (hasNextPage) {
+  if (currentPage < currentConversation.length - 1) {
     showMessage(text, () => {
       currentPage++;
       showConversationPage();
     });
   } else {
-    // 最後のページ
     showMessage(text);
     currentConversation = null;
   }

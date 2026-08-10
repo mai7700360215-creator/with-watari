@@ -23,9 +23,24 @@
       align-items: center;
     }
 .conversation-menu {
-  display: none;
+  display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.conversation-menu button {
+  min-height: 48px;
+  padding: 10px 8px;
+  font-size: 14px;
+  background: transparent;
+  color: #eee;
+  border: 1px solid #555;
+  cursor: pointer;
+}
+
+.conversation-menu button:last-child {
+  grid-column: 1 / -1;
 }
 .terminal {
   width: min(92vw, 700px);

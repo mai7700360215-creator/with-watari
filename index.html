@@ -259,8 +259,8 @@ let currentMode = "normal";
 
 modeSelect.addEventListener("change", () => {
   currentMode = modeSelect.value;
+  conversationMenu.style.display = "none";
 });
-    
     function getTimePeriod() {
   const hour = new Date().getHours();
 

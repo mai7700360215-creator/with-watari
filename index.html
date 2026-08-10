@@ -648,8 +648,13 @@ modeButtons.forEach((button) => {
 }); 
 let messageTimer = null;
 
-function showMessage(text) {
-  // 前のセリフ表示を止める
+let messageTimer = null;
+let currentConversation = null;
+let currentPage = 0;
+let currentOnComplete = null;
+
+function showMessage(text, onComplete = null) {
+  // 前のセリフ表示を停止
   if (messageTimer) {
     clearTimeout(messageTimer);
     messageTimer = null;
@@ -667,24 +672,59 @@ function showMessage(text) {
       textSpan.textContent += text[index];
       index++;
 
-      // 少しだけ揺らぎを入れて自然な表示にする
       const delay = 20 + Math.random() * 25;
       messageTimer = setTimeout(showNext, delay);
 
     } else {
       messageTimer = null;
 
-      // 長めのセリフだけ「続き」を表示
-      if (text.length >= 10) {
+      // ▶を表示
+      if (currentOnComplete) {
         const arrow = document.createElement("span");
         arrow.className = "continue-arrow";
         arrow.textContent = " ▶";
         message.appendChild(arrow);
+
+        message.style.cursor = "pointer";
+
+        message.onclick = () => {
+          message.onclick = null;
+          message.style.cursor = "default";
+
+          const next = currentOnComplete;
+          currentOnComplete = null;
+          next();
+        };
       }
     }
   }
 
+  currentOnComplete = onComplete;
   showNext();
+}
+
+function startConversation(pages) {
+  currentConversation = pages;
+  currentPage = 0;
+
+  showConversationPage();
+}
+
+function showConversationPage() {
+  const text = currentConversation[currentPage];
+
+  const hasNextPage = currentPage < currentConversation.length - 1;
+
+  if (hasNextPage) {
+    showMessage(text, () => {
+      currentPage++;
+      showConversationPage();
+    });
+  } else {
+    // 最後のページ
+    showMessage(text);
+    currentConversation = null;
+  }
 }
   </script>
 

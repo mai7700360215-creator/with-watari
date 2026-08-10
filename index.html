@@ -303,8 +303,21 @@ const teaButton = document.getElementById("teaButton");
 
 teaButton.addEventListener("click", () => {
   const conversations = conversationTalk.tea;
-  const index = Math.floor(Math.random() * conversations.length);
 
+  // まだ会話中なら、次のページへ
+  if (currentConversation) {
+    if (currentPage < currentConversation.length - 1) {
+      currentPage++;
+      showConversationPage();
+    } else {
+      currentConversation = null;
+      currentPage = 0;
+    }
+    return;
+  }
+
+  // 新しい会話をランダムに開始
+  const index = Math.floor(Math.random() * conversations.length);
   startConversation(conversations[index]);
 });
 
@@ -714,13 +727,9 @@ function showConversationPage() {
   const text = currentConversation[currentPage];
 
   if (currentPage < currentConversation.length - 1) {
-    showMessage(text, () => {
-      currentPage++;
-      showConversationPage();
-    });
+    showMessage(text);
   } else {
     showMessage(text);
-    currentConversation = null;
   }
 }
   </script>

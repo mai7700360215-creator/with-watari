@@ -163,6 +163,43 @@
   letter-spacing: 0.04em;
   color: #bbb;
 }
+    .mode-menu {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.mode-menu button {
+  min-height: 48px;
+  padding: 10px 6px;
+  background: transparent;
+  color: #eee;
+  border: 1px solid #555;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.mode-menu button:hover {
+  background: #333;
+}
+
+.sub-menu {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.sub-menu button {
+  min-height: 48px;
+  padding: 10px 8px;
+  background: transparent;
+  color: #eee;
+  border: 1px solid #555;
+  font-size: 14px;
+  cursor: pointer;
+}
   </style>
 </head>
 
@@ -185,13 +222,19 @@
     MODE
   </div>
 
-  <select id="modeSelect" class="mode-select">
-    <option value="normal">通常</option>
-    <option value="sleep">おやすみ</option>
-    <option value="return">帰宅</option>
-    <option value="meal">食事</option>
-    <option value="outing">外出</option>
-  </select>
+  <div id="modeMenu" class="mode-menu">
+
+  <button data-mode="normal">通常</button>
+  <button data-mode="conversation">話しかける</button>
+  <button data-mode="return">帰宅</button>
+  <button data-mode="meal">食事</button>
+  <button data-mode="out">外出</button>
+  <button data-mode="sleep">おやすみ</button>
+
+</div>
+
+<div id="subMenu" class="sub-menu"></div>
+  
   <button id="conversationButton">話しかける</button>
   <div id="conversationMenu" class="conversation-menu">
 <button id="teaButton">☕ ティータイム</button>

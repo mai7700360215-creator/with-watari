@@ -23,10 +23,7 @@
       align-items: center;
     }
 .conversation-menu {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-top: 15px;
+  display: none;
 }
 
 .conversation-menu button {
@@ -235,7 +232,6 @@
 
 <div id="subMenu" class="sub-menu"></div>
   
-  <button id="conversationButton">話しかける</button>
   <div id="conversationMenu" class="conversation-menu">
 <button id="teaButton">☕ ティータイム</button>
 <button id="whatButton">💬 いま何してた？</button>
@@ -290,14 +286,7 @@ whatButton.addEventListener("click", () => {
 });
 
     
-    
-conversationButton.addEventListener("click", () => {
-  if (conversationMenu.style.display === "grid") {
-    conversationMenu.style.display = "none";
-  } else {
-    conversationMenu.style.display = "grid";
-  }
-});
+  
 let currentMode = "normal";
 
 modeSelect.addEventListener("change", () => {
@@ -573,6 +562,36 @@ weatherButton.addEventListener("click", () => {
 
   return "🌤️";
 }
+
+ const modeButtons = document.querySelectorAll("#modeMenu button");
+const subMenu = document.getElementById("subMenu");
+
+modeButtons.forEach((button) => {
+
+  button.addEventListener("click", () => {
+
+    const mode = button.dataset.mode;
+
+    subMenu.innerHTML = "";
+
+    if (mode === "conversation") {
+
+      subMenu.innerHTML = `
+        <button id="teaButton">☕ ティータイム</button>
+        <button id="whatButton">💬 いま何してた？</button>
+        <button>👀 Lの様子</button>
+        <button>🎩 ワタリの話</button>
+        <button>👏 ほめる</button>
+        <button>🎲 あそぶ</button>
+        <button>⌨️ 集中する</button>
+      `;
+
+      subMenu.style.display = "grid";
+    }
+
+  });
+
+}); 
   </script>
 
 </body>

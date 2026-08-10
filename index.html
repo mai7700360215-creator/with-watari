@@ -222,6 +222,21 @@
   font-size: 14px;
   cursor: pointer;
 }
+    .continue-arrow {
+  display: inline-block;
+  margin-left: 4px;
+  animation: blinkArrow 1s infinite;
+}
+
+@keyframes blinkArrow {
+  0%, 45% {
+    opacity: 1;
+  }
+
+  50%, 100% {
+    opacity: 0.15;
+  }
+}
   </style>
 </head>
 
@@ -290,18 +305,18 @@ teaButton.addEventListener("click", () => {
   const messages = conversationTalk.tea;
   const index = Math.floor(Math.random() * messages.length);
 
-  message.textContent = messages[index];
+  showMessage(messages[index]);
 });
 
-    const whatButton = document.getElementById("whatButton");
+const whatButton = document.getElementById("whatButton");
 
 whatButton.addEventListener("click", () => {
   const messages = conversationTalk.what;
   const index = Math.floor(Math.random() * messages.length);
 
-  message.textContent = messages[index];
+  showMessage(messages[index]);
 });
-
+    
   let currentMode = "normal";
 
 const modeButtons = document.querySelectorAll("#modeMenu button");
@@ -619,6 +634,46 @@ modeButtons.forEach((button) => {
   });
 
 }); 
+let messageTimer = null;
+
+function showMessage(text) {
+  // 前のセリフ表示を止める
+  if (messageTimer) {
+    clearTimeout(messageTimer);
+    messageTimer = null;
+  }
+
+  message.innerHTML = "";
+
+  const textSpan = document.createElement("span");
+  message.appendChild(textSpan);
+
+  let index = 0;
+
+  function showNext() {
+    if (index < text.length) {
+      textSpan.textContent += text[index];
+      index++;
+
+      // 少しだけ揺らぎを入れて自然な表示にする
+      const delay = 20 + Math.random() * 25;
+      messageTimer = setTimeout(showNext, delay);
+
+    } else {
+      messageTimer = null;
+
+      // 長めのセリフだけ「続き」を表示
+      if (text.length >= 45) {
+        const arrow = document.createElement("span");
+        arrow.className = "continue-arrow";
+        arrow.textContent = " ▶";
+        message.appendChild(arrow);
+      }
+    }
+  }
+
+  showNext();
+}
   </script>
 
 </body>

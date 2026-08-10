@@ -302,10 +302,10 @@ const conversationMenu = document.getElementById("conversationMenu");
 const teaButton = document.getElementById("teaButton");
 
 teaButton.addEventListener("click", () => {
-  const messages = conversationTalk.tea;
-  const index = Math.floor(Math.random() * messages.length);
+  const conversations = conversationTalk.tea;
+  const index = Math.floor(Math.random() * conversations.length);
 
-  showMessage(messages[index]);
+  startConversation(conversations[index]);
 });
 
 const whatButton = document.getElementById("whatButton");
@@ -404,11 +404,23 @@ const generalTalk = {
 };
 
 const conversationTalk = {
-  tea: [
-    "お茶をお淹れしましょうか。",
-    "本日はどのお茶になさいますか。",
-    "少し休憩なさってはいかがですか。"
+tea: [
+  [
+    "少し休憩なさってはいかがですか。",
+    "良い茶葉を仕入れましたのでどうぞ。お口に合うといいのですが。",
+    "喜んでいただけたようでなによりです。"
   ],
+  [
+    "お茶をお淹れしましょうか。",
+    "本日はいつもとは違う茶葉もございますよ。",
+    "こちらもなかなか良い香りでございます。"
+  ],
+  [
+    "本日はどのお茶になさいますか。",
+    "どれもおすすめですが……迷われますか？",
+    "では、こちらをお持ちしましょう。"
+  ]
+],
 
   what: [
     "お戻りになるまで、こちらで待機しておりました。",

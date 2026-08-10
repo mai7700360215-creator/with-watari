@@ -331,16 +331,23 @@ const whatButton = document.getElementById("whatButton");
 whatButton.addEventListener("click", () => {
   const conversations = conversationTalk.what;
 
-  if (currentConversation) {
+  // 「いま何してた？」の会話途中なら次のページへ
+  if (currentConversation && currentConversationType === "what") {
     if (currentPage < currentConversation.length - 1) {
       currentPage++;
       showConversationPage();
     } else {
       currentConversation = null;
       currentPage = 0;
+      currentConversationType = null;
     }
     return;
   }
+
+  // 別の会話中なら、新しい会話を開始
+  currentConversation = null;
+  currentPage = 0;
+  currentConversationType = "what";
 
   const index = Math.floor(Math.random() * conversations.length);
   startConversation(conversations[index]);

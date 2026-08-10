@@ -304,19 +304,24 @@ const teaButton = document.getElementById("teaButton");
 teaButton.addEventListener("click", () => {
   const conversations = conversationTalk.tea;
 
-  // まだ会話中なら、次のページへ
-  if (currentConversation) {
+  // ティータイムの会話途中なら次のページへ
+  if (currentConversation && currentConversationType === "tea") {
     if (currentPage < currentConversation.length - 1) {
       currentPage++;
       showConversationPage();
     } else {
       currentConversation = null;
       currentPage = 0;
+      currentConversationType = null;
     }
     return;
   }
 
-  // 新しい会話をランダムに開始
+  // 別の会話中なら、いったん終了して新しく開始
+  currentConversation = null;
+  currentPage = 0;
+  currentConversationType = "tea";
+
   const index = Math.floor(Math.random() * conversations.length);
   startConversation(conversations[index]);
 });
@@ -686,7 +691,8 @@ let messageTimer = null;
 
 let currentConversation = null;
 let currentPage = 0;
-
+let currentConversationType = null;
+    
 function showMessage(text, hasNextPage = false) {
   if (messageTimer) {
     clearTimeout(messageTimer);

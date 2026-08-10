@@ -230,7 +230,6 @@
 
 </div>
 
-<div id="subMenu" class="sub-menu"></div>
   
   <div id="conversationMenu" class="conversation-menu">
 <button id="teaButton">☕ ティータイム</button>
@@ -263,8 +262,6 @@
     const clock = document.getElementById("clock");
 const weatherButton = document.getElementById("weatherButton");
 const weather = document.getElementById("weather");
-const modeSelect = document.getElementById("modeSelect");
-const conversationButton = document.getElementById("conversationButton");
 const conversationMenu = document.getElementById("conversationMenu");
 
 const teaButton = document.getElementById("teaButton");
@@ -285,13 +282,24 @@ whatButton.addEventListener("click", () => {
   message.textContent = messages[index];
 });
 
-    
-  
-let currentMode = "normal";
+  let currentMode = "normal";
 
-modeSelect.addEventListener("change", () => {
-  currentMode = modeSelect.value;
-  conversationMenu.style.display = "none";
+const modeButtons = document.querySelectorAll("#modeMenu button");
+
+modeButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+
+    const mode = button.dataset.mode;
+    currentMode = mode;
+
+    // いったん話しかけるメニューを閉じる
+    conversationMenu.style.display = "none";
+
+    // 話しかけるを選んだときだけ開く
+    if (mode === "conversation") {
+      conversationMenu.style.display = "grid";
+    }
+  });
 });
     function getTimePeriod() {
   const hour = new Date().getHours();

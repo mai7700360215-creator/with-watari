@@ -324,10 +324,21 @@ teaButton.addEventListener("click", () => {
 const whatButton = document.getElementById("whatButton");
 
 whatButton.addEventListener("click", () => {
-  const messages = conversationTalk.what;
-  const index = Math.floor(Math.random() * messages.length);
+  const conversations = conversationTalk.what;
 
-  showMessage(messages[index]);
+  if (currentConversation) {
+    if (currentPage < currentConversation.length - 1) {
+      currentPage++;
+      showConversationPage();
+    } else {
+      currentConversation = null;
+      currentPage = 0;
+    }
+    return;
+  }
+
+  const index = Math.floor(Math.random() * conversations.length);
+  startConversation(conversations[index]);
 });
     
   let currentMode = "normal";
@@ -435,12 +446,23 @@ tea: [
   ]
 ],
 
-  what: [
+what: [
+  [
     "お戻りになるまで、こちらで待機しておりました。",
-    "特に変わったことはございません。いつも通りでございます。",
-    "L様の様子を確認しておりました。"
+    "特に変わったことはございません。",
+    "Lもいつも通りでございます。"
+  ],
+  [
+    "少々資料の整理をしておりました。",
+    "思ったより時間がかかってしまいまして。",
+    "もう少し効率のよい方法を考えたほうがよさそうですね。"
+  ],
+  [
+    "ちょうど紅茶を淹れようとしていたところです。",
+    "よろしければご一緒にいかがですか。",
+    "……ああ、ティータイムと内容が被ってしまいましたね。"
   ]
-};
+];
     
 const talkHistory = {
   normal: [],

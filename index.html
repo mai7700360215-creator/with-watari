@@ -664,7 +664,7 @@ let messageTimer = null;
 let currentConversation = null;
 let currentPage = 0;
 
-function showMessage(text, onComplete = null) {
+function showMessage(text, hasNextPage = false) {
   if (messageTimer) {
     clearTimeout(messageTimer);
     messageTimer = null;
@@ -689,23 +689,8 @@ function showMessage(text, onComplete = null) {
 
     messageTimer = null;
 
-    // 次のページがある場合
-    if (onComplete) {
-      const arrow = document.createElement("span");
-      arrow.className = "continue-arrow";
-      arrow.textContent = " ▶";
-      message.appendChild(arrow);
-
-      message.style.cursor = "pointer";
-
-      message.onclick = () => {
-        message.onclick = null;
-        message.style.cursor = "default";
-        onComplete();
-      };
-
-    // 普通の長いセリフの場合
-    } else if (text.length >= 45) {
+    // 長いセリフ、または次のページがある場合は▶
+    if (hasNextPage || text.length >= 45) {
       const arrow = document.createElement("span");
       arrow.className = "continue-arrow";
       arrow.textContent = " ▶";
@@ -715,6 +700,7 @@ function showMessage(text, onComplete = null) {
 
   showNext();
 }
+
 
 function startConversation(pages) {
   currentConversation = pages;
@@ -726,11 +712,10 @@ function startConversation(pages) {
 function showConversationPage() {
   const text = currentConversation[currentPage];
 
-  if (currentPage < currentConversation.length - 1) {
-    showMessage(text);
-  } else {
-    showMessage(text);
-  }
+  const hasNextPage =
+    currentPage < currentConversation.length - 1;
+
+  showMessage(text, hasNextPage);
 }
   </script>
 

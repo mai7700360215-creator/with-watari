@@ -23,16 +23,19 @@
       align-items: center;
     }
 .conversation-menu {
-  display: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 12px;
 }
 
 .conversation-menu button {
   min-height: 48px;
   padding: 10px 8px;
-  font-size: 14px;
   background: transparent;
   color: #eee;
   border: 1px solid #555;
+  font-size: 14px;
   cursor: pointer;
 }
 

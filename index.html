@@ -320,20 +320,27 @@ const whatButton = document.getElementById("whatButton");
   let currentMode = "normal";
 
 const modeButtons = document.querySelectorAll("#modeMenu button");
-
+const returnMenu = document.getElementById("returnMenu");
 modeButtons.forEach((button) => {
   button.addEventListener("click", () => {
 
     const mode = button.dataset.mode;
     currentMode = mode;
 
-    // いったん話しかけるメニューを閉じる
+    // いったん全部のサブメニューを閉じる
     conversationMenu.style.display = "none";
+    returnMenu.style.display = "none";
 
-    // 話しかけるを選んだときだけ開く
+    // 話しかける
     if (mode === "conversation") {
       conversationMenu.style.display = "grid";
     }
+
+    // 帰宅
+    if (mode === "return") {
+      returnMenu.style.display = "grid";
+    }
+
   });
 });
     function getTimePeriod() {

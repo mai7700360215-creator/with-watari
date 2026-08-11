@@ -273,9 +273,29 @@
   <button id="todayButton">📋 今日の出来事</button>
   <button id="returnTeaButton">☕ お茶</button>
   <button id="souvenirButton">🎁 おみやげ</button>
-
 </div>
-    
+<div id="mealMenu" class="conversation-menu">
+  <button id="menuButton">🍽 今日のメニュー</button>
+  <button id="mealCommentButton">💬 感想</button>
+  <button id="dessertButton">🍰 デザート</button>
+  <button id="afterMealButton">☕ 食後</button>
+  <button id="helpCookingButton">🥢 料理を手伝う</button>
+</div>
+    <div id="outMenu" class="conversation-menu">
+  <button id="leaveButton">🚪 いってきます</button>
+  <button id="forgotButton">👀 忘れ物</button>
+  <button id="scheduleButton">📋 今日の予定</button>
+  <button id="hugButton">🤝 ハグ</button>
+  <button id="walkButton">🚶 一緒に散歩</button>
+  <button id="workButton">💼 仕事</button>
+</div>
+<div id="sleepMenu" class="conversation-menu">
+  <button id="lullabyButton">🎵 子守歌</button>
+  <button id="readingButton">📖 よみきかせ</button>
+  <button id="hotMilkButton">🥛 ホットミルク</button>
+  <button id="lateNightButton">🌙 夜更かし</button>
+  <button id="sleepCallButton">📞 寝落ち電話</button>
+</div>
  <div id="conversationMenu" class="conversation-menu">    
 <button id="teaButton">☕ ティータイム</button>
 <button id="whatButton">💬 いま何してた？</button>
@@ -321,6 +341,9 @@ const whatButton = document.getElementById("whatButton");
 
 const modeButtons = document.querySelectorAll("#modeMenu button");
 const returnMenu = document.getElementById("returnMenu");
+const mealMenu = document.getElementById("mealMenu");
+const outMenu = document.getElementById("outMenu");
+const sleepMenu = document.getElementById("sleepMenu");
 modeButtons.forEach((button) => {
   button.addEventListener("click", () => {
 
@@ -330,6 +353,9 @@ modeButtons.forEach((button) => {
     // いったん全部のサブメニューを閉じる
     conversationMenu.style.display = "none";
     returnMenu.style.display = "none";
+    mealMenu.style.display = "none";
+　　outMenu.style.display = "none";
+　　sleepMenu.style.display = "none";
 
     // 話しかける
     if (mode === "conversation") {
@@ -340,7 +366,18 @@ modeButtons.forEach((button) => {
     if (mode === "return") {
       returnMenu.style.display = "grid";
     }
-
+    // 食事
+if (mode === "meal") {
+  mealMenu.style.display = "grid";
+}
+// 帰宅
+if (mode === "out") {
+  outMenu.style.display = "grid";
+}
+// おやすみ
+if (mode === "sleep") {
+  sleepMenu.style.display = "grid";
+}
   });
 });
     function getTimePeriod() {

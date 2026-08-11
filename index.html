@@ -904,7 +904,8 @@ function showConversationPage() {
 
   showMessage(text, hasNextPage);
 }
-
+const conversationOrder = {};
+const conversationPosition = {};
     const conversationButtonMap = {
   teaButton: "tea",
   whatButton: "what",
@@ -953,9 +954,34 @@ Object.entries(conversationButtonMap).forEach(([buttonId, conversationType]) => 
     currentPage = 0;
     currentConversationType = conversationType;
 
-    const index = Math.floor(Math.random() * conversations.length);
+if (!conversationOrder[conversationType] ||
+    conversationPosition[conversationType] >= conversationOrder[conversationType].length) {
 
-    startConversation(conversations[index]);
+  conversationOrder[conversationType] =
+    [...Array(conversations.length).keys()];
+
+  // 順番をシャッフル
+  for (let i = conversationOrder[conversationType].length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [
+      conversationOrder[conversationType][i],
+      conversationOrder[conversationType][j]
+    ] = [
+      conversationOrder[conversationType][j],
+      conversationOrder[conversationType][i]
+    ];
+  }
+
+  conversationPosition[conversationType] = 0;
+}
+
+const index =
+  conversationOrder[conversationType][conversationPosition[conversationType]];
+
+conversationPosition[conversationType]++;
+
+startConversation(conversations[index]);
   });
 });
   </script>

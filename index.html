@@ -269,11 +269,11 @@
   <div id="conversationMenu" class="conversation-menu">
 <button id="teaButton">☕ ティータイム</button>
 <button id="whatButton">💬 いま何してた？</button>
-  <button>👀 Lの様子</button>
-  <button>🎩 ワタリの話</button>
-  <button>👏 ほめる</button>
-  <button>🎲 あそぶ</button>
-  <button>⌨️ 集中する</button>
+<button id="lButton">👀 Lの様子</button>
+<button id="watariButton">🎩 ワタリの話</button>
+<button id="praiseButton">👏 ほめる</button>
+<button id="playButton">🎲 あそぶ</button>
+<button id="focusButton">⌨️ 集中する</button>
 </div>
 
 
@@ -301,57 +301,11 @@ const conversationMenu = document.getElementById("conversationMenu");
 
 const teaButton = document.getElementById("teaButton");
 
-teaButton.addEventListener("click", () => {
-  const conversations = conversationTalk.tea;
 
-  // ティータイムの会話途中なら次のページへ
-  if (currentConversation && currentConversationType === "tea") {
-    if (currentPage < currentConversation.length - 1) {
-      currentPage++;
-      showConversationPage();
-    } else {
-      currentConversation = null;
-      currentPage = 0;
-      currentConversationType = null;
-    }
-    return;
-  }
-
-  // 別の会話中なら、いったん終了して新しく開始
-  currentConversation = null;
-  currentPage = 0;
-  currentConversationType = "tea";
-
-  const index = Math.floor(Math.random() * conversations.length);
-  startConversation(conversations[index]);
-});
 
 const whatButton = document.getElementById("whatButton");
 
-whatButton.addEventListener("click", () => {
-  const conversations = conversationTalk.what;
 
-  // 「いま何してた？」の会話途中なら次のページへ
-  if (currentConversation && currentConversationType === "what") {
-    if (currentPage < currentConversation.length - 1) {
-      currentPage++;
-      showConversationPage();
-    } else {
-      currentConversation = null;
-      currentPage = 0;
-      currentConversationType = null;
-    }
-    return;
-  }
-
-  // 別の会話中なら、新しい会話を開始
-  currentConversation = null;
-  currentPage = 0;
-  currentConversationType = "what";
-
-  const index = Math.floor(Math.random() * conversations.length);
-  startConversation(conversations[index]);
-});
     
   let currentMode = "normal";
 
@@ -753,6 +707,54 @@ function showConversationPage() {
 
   showMessage(text, hasNextPage);
 }
+
+    const conversationButtonMap = {
+  teaButton: "tea",
+  whatButton: "what",
+  lButton: "l",
+  watariButton: "watari",
+  praiseButton: "praise",
+  playButton: "play",
+  focusButton: "focus"
+};
+
+Object.entries(conversationButtonMap).forEach(([buttonId, conversationType]) => {
+  const button = document.getElementById(buttonId);
+
+  if (!button) return;
+
+  button.addEventListener("click", () => {
+    const conversations = conversationTalk[conversationType];
+
+    if (!conversations || conversations.length === 0) return;
+
+    // 同じボタンの会話途中なら次のページへ
+    if (
+      currentConversation &&
+      currentConversationType === conversationType
+    ) {
+      if (currentPage < currentConversation.length - 1) {
+        currentPage++;
+        showConversationPage();
+      } else {
+        currentConversation = null;
+        currentPage = 0;
+        currentConversationType = null;
+      }
+
+      return;
+    }
+
+    // 別の会話なら、現在の会話を終了して新しく開始
+    currentConversation = null;
+    currentPage = 0;
+    currentConversationType = conversationType;
+
+    const index = Math.floor(Math.random() * conversations.length);
+
+    startConversation(conversations[index]);
+  });
+});
   </script>
 
 </body>

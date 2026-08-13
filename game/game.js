@@ -4,20 +4,8 @@ let selectedDrink = null;
 // 長押しタイマー
 let pourTimer = null;
 
-
-// =========================
-// 飲み物を選ぶ
-// =========================
-
-function chooseDrink(drink) {
-  selectedDrink = drink;
-
-  const cup = document.getElementById("cup");
-
-  // 空のカップに戻す
-  cup.src = "images/cup.png";
-  cup.style.display = "block";
-}
+// すでに完成したか
+let isFinished = false;
 
 
 // =========================
@@ -30,19 +18,24 @@ function startPouring(drink) {
 
   const cup = document.getElementById("cup");
 
-  // 空のカップを表示
+  // 新しく注ぎ始めるので空にする
   cup.src = "images/cup.png";
   cup.style.display = "block";
+
+  isFinished = false;
 
   // 前のタイマーを解除
   if (pourTimer !== null) {
     clearTimeout(pourTimer);
   }
 
-  // 3秒押し続けたら完成
+  // 3秒長押し
   pourTimer = setTimeout(function() {
 
     cup.src = "images/" + selectedDrink + ".png";
+
+    // 完成したことを記録
+    isFinished = true;
 
     pourTimer = null;
 
@@ -56,6 +49,12 @@ function startPouring(drink) {
 
 function stopPouring() {
 
+  // すでに完成しているなら何もしない
+  if (isFinished) {
+    return;
+  }
+
+  // 3秒前ならキャンセル
   if (pourTimer !== null) {
     clearTimeout(pourTimer);
     pourTimer = null;

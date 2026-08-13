@@ -26,7 +26,6 @@ function chooseDrink(drink) {
 
 function startPouring(drink) {
 
-  // 飲み物を選択
   selectedDrink = drink;
 
   const cup = document.getElementById("cup");
@@ -35,12 +34,12 @@ function startPouring(drink) {
   cup.src = "images/cup.png";
   cup.style.display = "block";
 
-  // 既にタイマーがあれば解除
+  // 前のタイマーを解除
   if (pourTimer !== null) {
     clearTimeout(pourTimer);
   }
 
-  // 3秒後に完成
+  // 3秒押し続けたら完成
   pourTimer = setTimeout(function() {
 
     cup.src = "images/" + selectedDrink + ".png";

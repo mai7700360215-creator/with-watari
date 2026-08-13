@@ -107,11 +107,15 @@ body {
 }
 
 
+/* 左の椅子 */
+
 .chair-left {
   left: 130px;
   bottom: 100px;
 }
 
+
+/* 右の椅子 */
 
 .chair-right {
   right: 130px;
@@ -135,13 +139,18 @@ body {
 }
 
 
+/* ワタリ */
+
 .watari {
-  left: 145px;
+  left: 105px;
   bottom: 80px;
 }
 
+
+/* L */
+
 .l {
-  right: 145px;
+  right: 105px;
   bottom: 80px;
 }
 

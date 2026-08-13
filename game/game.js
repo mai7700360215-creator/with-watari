@@ -1,18 +1,6 @@
-// =========================
-// 変数
-// =========================
-
-// 選択中の飲み物
 let selectedDrink = null;
-
-// 注ぎ始めた時間
 let pourStartTime = null;
-
-// バー更新用
 let pourAnimation = null;
-
-// 完成したか
-let isFinished = false;
 
 
 // =========================
@@ -27,30 +15,16 @@ function startPouring(drink) {
   const result = document.getElementById("result");
   const progress = document.getElementById("pour-progress");
 
-
-  // 空のカップに戻す
   cup.src = "images/cup.png";
-
   cup.style.display = "block";
 
-
-  // 前回の判定を消す
   result.textContent = "";
-
   result.style.display = "none";
 
-
-  // バーを0に戻す
   progress.style.width = "0%";
-
-
-  // 新しく開始
-  isFinished = false;
 
   pourStartTime = Date.now();
 
-
-  // バーを動かす
   updatePourBar();
 }
 
@@ -65,27 +39,18 @@ function updatePourBar() {
     return;
   }
 
-
   const elapsed = Date.now() - pourStartTime;
 
-
-  // 5秒で100%
   let percent = (elapsed / 5000) * 100;
 
-
-  // 100%を超えない
   if (percent > 100) {
     percent = 100;
   }
 
-
-  const progress = document.getElementById("pour-progress");
-
-
-  progress.style.width = percent + "%";
+  document.getElementById("pour-progress").style.width =
+    percent + "%";
 
 
-  // 5秒までは更新
   if (elapsed < 5000) {
 
     pourAnimation =
@@ -108,8 +73,6 @@ function stopPouring() {
     return;
   }
 
-
-  // バー更新を停止
   if (pourAnimation !== null) {
 
     cancelAnimationFrame(pourAnimation);
@@ -117,52 +80,31 @@ function stopPouring() {
     pourAnimation = null;
   }
 
-
-  // 注いだ時間
   const elapsed =
     Date.now() - pourStartTime;
-
 
   const seconds =
     elapsed / 1000;
 
 
-  // =========================
-  // カップに飲み物を入れる
-  // =========================
+  // カップを飲み物入りにする
+  const cup =
+    document.getElementById("cup");
 
-  if (elapsed > 0) {
-
-    const cup =
-      document.getElementById("cup");
+  cup.src =
+    "images/" + selectedDrink + ".png";
 
 
-    cup.src =
-      "images/" + selectedDrink + ".png";
-
-
-    cup.style.display =
-      "block";
-
-
-    isFinished = true;
-  }
-
-
-  // =========================
   // 判定
-  // =========================
-
   showResult(seconds);
 
 
-  // リセット
   pourStartTime = null;
 }
 
 
 // =========================
-// 判定結果
+// 判定
 // =========================
 
 function showResult(seconds) {
@@ -170,9 +112,7 @@ function showResult(seconds) {
   const result =
     document.getElementById("result");
 
-
-  result.style.display =
-    "block";
+  result.style.display = "block";
 
 
   if (seconds < 2.5) {
@@ -180,25 +120,104 @@ function showResult(seconds) {
     result.textContent =
       "少なすぎます。";
 
-  }
-
-  else if (seconds <= 3.5) {
+  } else if (seconds <= 3.5) {
 
     result.textContent =
       "ちょうどいい！";
 
-  }
-
-  else if (seconds < 5) {
+  } else if (seconds < 5) {
 
     result.textContent =
       "少し多いです。";
 
-  }
-
-  else {
+  } else {
 
     result.textContent =
       "入れすぎです！";
   }
+}
+
+
+// =========================
+// スマホ・PC共通の操作
+// =========================
+
+const buttons =
+  document.querySelectorAll("#drink-buttons button");
+
+
+buttons.forEach(function(button) {
+
+  // PC
+  button.addEventListener("mousedown", function() {
+
+    const drink =
+      getDrinkFromButton(button);
+
+    startPouring(drink);
+  });
+
+
+  button.addEventListener("mouseup", function() {
+
+    stopPouring();
+  });
+
+
+  // スマホ
+  button.addEventListener("touchstart", function(event) {
+
+    event.preventDefault();
+
+    const drink =
+      getDrinkFromButton(button);
+
+    startPouring(drink);
+  }, { passive: false });
+
+
+  button.addEventListener("touchend", function(event) {
+
+    event.preventDefault();
+
+    stopPouring();
+  }, { passive: false });
+
+
+  button.addEventListener("touchcancel", function() {
+
+    stopPouring();
+  });
+
+});
+
+
+// =========================
+// ボタンから飲み物を判定
+// =========================
+
+function getDrinkFromButton(button) {
+
+  const text =
+    button.textContent.trim();
+
+
+  if (text === "緑茶") {
+
+    return "green_tea";
+
+  }
+
+  if (text === "コーヒー") {
+
+    return "coffee";
+
+  }
+
+  if (text === "紅茶") {
+
+    return "black_tea";
+  }
+
+  return null;
 }

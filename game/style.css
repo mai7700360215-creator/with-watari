@@ -139,17 +139,6 @@ body {
 }
 
 
-/* ワタリ */
-
-.watari {
-  left: 200px;
-  bottom: 80px;
-}
-
-.l {
-  right: 200px;
-  bottom: 80px;
-}
 
 /* =========================
    ワタリのメッセージ
@@ -334,6 +323,8 @@ body {
 
   touch-action: none;
 }
+/* ワタリ */
+
 .watari {
   left: 145px !important;
   bottom: 80px;

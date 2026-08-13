@@ -4,7 +4,72 @@ let pourAnimation = null;
 
 
 // =========================
-// 長押し開始
+// ボタン取得
+// =========================
+
+const buttons = document.querySelectorAll("#drink-buttons button");
+
+buttons.forEach(function(button) {
+
+  const drink = button.dataset.drink;
+
+
+  // PC
+  button.addEventListener("mousedown", function(event) {
+
+    event.preventDefault();
+
+    startPouring(drink);
+
+  });
+
+
+  button.addEventListener("mouseup", function(event) {
+
+    event.preventDefault();
+
+    stopPouring();
+
+  });
+
+
+  button.addEventListener("mouseleave", function() {
+
+    stopPouring();
+
+  });
+
+
+  // スマホ
+  button.addEventListener("touchstart", function(event) {
+
+    event.preventDefault();
+
+    startPouring(drink);
+
+  }, { passive: false });
+
+
+  button.addEventListener("touchend", function(event) {
+
+    event.preventDefault();
+
+    stopPouring();
+
+  }, { passive: false });
+
+
+  button.addEventListener("touchcancel", function() {
+
+    stopPouring();
+
+  });
+
+});
+
+
+// =========================
+// 注ぎ始める
 // =========================
 
 function startPouring(drink) {
@@ -12,25 +77,34 @@ function startPouring(drink) {
   selectedDrink = drink;
 
   const cup = document.getElementById("cup");
-  const result = document.getElementById("result");
   const progress = document.getElementById("pour-progress");
+  const result = document.getElementById("result");
 
+
+  // 空のカップ
   cup.src = "images/cup.png";
   cup.style.display = "block";
 
+
+  // 判定を消す
   result.textContent = "";
   result.style.display = "none";
 
+
+  // バーを0に戻す
   progress.style.width = "0%";
 
+
+  // 開始時間
   pourStartTime = Date.now();
+
 
   updatePourBar();
 }
 
 
 // =========================
-// バー更新
+// バーを動かす
 // =========================
 
 function updatePourBar() {
@@ -39,13 +113,19 @@ function updatePourBar() {
     return;
   }
 
-  const elapsed = Date.now() - pourStartTime;
 
-  let percent = (elapsed / 5000) * 100;
+  const elapsed =
+    Date.now() - pourStartTime;
+
+
+  let percent =
+    (elapsed / 5000) * 100;
+
 
   if (percent > 100) {
     percent = 100;
   }
+
 
   document.getElementById("pour-progress").style.width =
     percent + "%";
@@ -56,15 +136,13 @@ function updatePourBar() {
     pourAnimation =
       requestAnimationFrame(updatePourBar);
 
-  } else {
-
-    pourAnimation = null;
   }
+
 }
 
 
 // =========================
-// 長押し終了
+// 指・マウスを離す
 // =========================
 
 function stopPouring() {
@@ -73,23 +151,28 @@ function stopPouring() {
     return;
   }
 
+
   if (pourAnimation !== null) {
 
     cancelAnimationFrame(pourAnimation);
 
     pourAnimation = null;
+
   }
+
 
   const elapsed =
     Date.now() - pourStartTime;
+
 
   const seconds =
     elapsed / 1000;
 
 
-  // カップを飲み物入りにする
+  // 飲み物入りカップ
   const cup =
     document.getElementById("cup");
+
 
   cup.src =
     "images/" + selectedDrink + ".png";
@@ -99,18 +182,20 @@ function stopPouring() {
   showResult(seconds);
 
 
+  // リセット
   pourStartTime = null;
 }
 
 
 // =========================
-// 判定
+// 判定結果
 // =========================
 
 function showResult(seconds) {
 
   const result =
     document.getElementById("result");
+
 
   result.style.display = "block";
 
@@ -120,104 +205,27 @@ function showResult(seconds) {
     result.textContent =
       "少なすぎます。";
 
-  } else if (seconds <= 3.5) {
+  }
+
+  else if (seconds <= 3.5) {
 
     result.textContent =
       "ちょうどいい！";
 
-  } else if (seconds < 5) {
+  }
+
+  else if (seconds < 5) {
 
     result.textContent =
       "少し多いです。";
 
-  } else {
+  }
+
+  else {
 
     result.textContent =
       "入れすぎです！";
-  }
-}
-
-
-// =========================
-// スマホ・PC共通の操作
-// =========================
-
-const buttons =
-  document.querySelectorAll("#drink-buttons button");
-
-
-buttons.forEach(function(button) {
-
-  // PC
-  button.addEventListener("mousedown", function() {
-
-    const drink =
-      getDrinkFromButton(button);
-
-    startPouring(drink);
-  });
-
-
-  button.addEventListener("mouseup", function() {
-
-    stopPouring();
-  });
-
-
-  // スマホ
-  button.addEventListener("touchstart", function(event) {
-
-    event.preventDefault();
-
-    const drink =
-      getDrinkFromButton(button);
-
-    startPouring(drink);
-  }, { passive: false });
-
-
-  button.addEventListener("touchend", function(event) {
-
-    event.preventDefault();
-
-    stopPouring();
-  }, { passive: false });
-
-
-  button.addEventListener("touchcancel", function() {
-
-    stopPouring();
-  });
-
-});
-
-
-// =========================
-// ボタンから飲み物を判定
-// =========================
-
-function getDrinkFromButton(button) {
-
-  const text =
-    button.textContent.trim();
-
-
-  if (text === "緑茶") {
-
-    return "green_tea";
 
   }
 
-  if (text === "コーヒー") {
-
-    return "coffee";
-
-  }
-
-  if (text === "紅茶") {
-
-    return "black_tea";
-  }
-
-  return null;
 }

@@ -1,7 +1,28 @@
+let selectedDrink = null;
 
 function chooseDrink(drink) {
-  const drinkImage = document.getElementById("drink");
+  selectedDrink = drink;
 
-  drinkImage.src = "images/" + drink + ".png";
-  drinkImage.style.display = "block";
+  const cup = document.getElementById("cup");
+
+  // 空のカップを表示
+  cup.src = "images/cup.png";
+  cup.style.display = "block";
 }
+
+
+// カップを長押ししたら注ぐ
+function startPouring() {
+  if (!selectedDrink) return;
+
+  const cup = document.getElementById("cup");
+
+  cup.src = "images/" + selectedDrink + ".png";
+}
+
+
+// マウス
+document.getElementById("cup").addEventListener("mousedown", startPouring);
+
+// タッチ
+document.getElementById("cup").addEventListener("touchstart", startPouring);

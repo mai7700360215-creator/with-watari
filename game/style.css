@@ -285,26 +285,28 @@ body {
    判定結果
 ========================= */
 
-#result {
-  position: absolute;
+##result {
+  position: absolute !important;
 
-  left: 50%;
-  top: 105px;
+  left: 50% !important;
+  top: 105px !important;
 
-  transform: translateX(-50%);
+  transform: translateX(-50%) !important;
 
-  background: transparent;
-  border: none;
-  padding: 0;
+  background: transparent !important;
+  border: none !important;
 
-  color: white;
+  padding: 0 !important;
+  margin: 0 !important;
+
+  color: white !important;
 
   font-size: 18px;
   font-weight: bold;
 
   white-space: nowrap;
 
-  z-index: 50;
+  z-index: 100 !important;
 
   display: none;
 

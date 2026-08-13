@@ -1,32 +1,78 @@
 // 選択中の飲み物
 let selectedDrink = null;
 
+// 長押し用タイマー
+let pourTimer = null;
 
+
+// =========================
 // 飲み物を選ぶ
+// =========================
+
 function chooseDrink(drink) {
   selectedDrink = drink;
 
-  // カップは空のまま
+  // カップを空に戻す
   const cup = document.getElementById("cup");
   cup.src = "images/cup.png";
   cup.style.display = "block";
 }
 
 
-// カップを長押ししたら注ぐ
+// =========================
+// 注ぎ始める
+// =========================
+
 function startPouring() {
   if (!selectedDrink) return;
 
-  const cup = document.getElementById("cup");
+  // 3秒後に完成
+  pourTimer = setTimeout(function () {
+    const cup = document.getElementById("cup");
 
-  // 選んだ飲み物に変更
-  cup.src = "images/" + selectedDrink + ".png";
+    cup.src = "images/" + selectedDrink + ".png";
+
+    pourTimer = null;
+  }, 3000);
 }
 
 
-// カップをマウスで押したとき
-document.getElementById("cup").addEventListener("mousedown", startPouring);
+// =========================
+// 注ぐのをやめる
+// =========================
+
+function stopPouring() {
+  if (pourTimer !== null) {
+    clearTimeout(pourTimer);
+    pourTimer = null;
+  }
+}
 
 
-// カップをタッチしたとき
-document.getElementById("cup").addEventListener("touchstart", startPouring);
+// =========================
+// カップにイベントを設定
+// =========================
+
+const cup = document.getElementById("cup");
+
+
+// マウスで押し始める
+cup.addEventListener("mousedown", startPouring);
+
+// マウスを離す
+cup.addEventListener("mouseup", stopPouring);
+
+// カップからマウスが外れた
+cup.addEventListener("mouseleave", stopPouring);
+
+
+// スマホ・タブレット用
+cup.addEventListener("touchstart", function (event) {
+  event.preventDefault();
+  startPouring();
+});
+
+cup.addEventListener("touchend", function (event) {
+  event.preventDefault();
+  stopPouring();
+});

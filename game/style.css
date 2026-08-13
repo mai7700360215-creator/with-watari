@@ -289,23 +289,22 @@ body {
   position: absolute;
 
   left: 50%;
-  top: 95px;
+  top: 105px;
 
   transform: translateX(-50%);
 
-  background: none;
+  background: transparent;
   border: none;
-
   padding: 0;
 
   color: white;
 
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
 
   white-space: nowrap;
 
-  z-index: 100;
+  z-index: 50;
 
   display: none;
 

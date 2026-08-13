@@ -3,6 +3,8 @@ body {
   background: #222;
 
   display: flex;
+  flex-direction: column;
+
   justify-content: center;
   align-items: center;
 
@@ -20,9 +22,11 @@ body {
   width: 500px;
   height: 320px;
 
-  overflow: visible;
+  overflow: hidden;
 
   image-rendering: pixelated;
+
+  flex-shrink: 0;
 }
 
 
@@ -40,7 +44,9 @@ body {
   height: 80px;
 
   background-image: url("images/br_wall.png");
+
   background-repeat: repeat;
+
   background-size: 100px 100px;
 }
 
@@ -59,7 +65,9 @@ body {
   height: 240px;
 
   background-image: url("images/floor.png");
+
   background-repeat: repeat;
+
   background-size: 100px 100px;
 }
 
@@ -78,6 +86,8 @@ body {
   bottom: 100px;
 
   image-rendering: pixelated;
+
+  z-index: 2;
 }
 
 
@@ -92,12 +102,16 @@ body {
   height: 48px;
 
   image-rendering: pixelated;
+
+  z-index: 2;
 }
+
 
 .chair-left {
   left: 130px;
   bottom: 100px;
 }
+
 
 .chair-right {
   right: 130px;
@@ -116,12 +130,16 @@ body {
   height: 64px;
 
   image-rendering: pixelated;
+
+  z-index: 3;
 }
+
 
 .watari {
   left: 40px;
   bottom: 80px;
 }
+
 
 .l {
   right: 40px;
@@ -142,50 +160,16 @@ body {
   transform: translateX(-50%);
 
   background: white;
+
   border: 2px solid #333;
 
   padding: 8px 12px;
 
   font-size: 14px;
+
   white-space: nowrap;
 
-  z-index: 10;
-}
-
-
-/* =========================
-   飲み物ボタン
-========================= */
-
-#drink-buttons {
-  position: absolute;
-
-  left: 50%;
-  bottom: 15px;
-
-  transform: translateX(-50%);
-
-  display: flex;
-  gap: 8px;
-
-  z-index: 10;
-}
-
-#drink-buttons button {
-  padding: 6px 10px;
-
-  border: 2px solid #333;
-  background: white;
-
-  cursor: pointer;
-
-  font-size: 13px;
-
-  user-select: none;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
-
-  touch-action: none;
+  z-index: 30;
 }
 
 
@@ -206,12 +190,12 @@ body {
 
   image-rendering: pixelated;
 
-  z-index: 5;
-
-  cursor: pointer;
+  z-index: 10;
 
   user-select: none;
+
   -webkit-user-select: none;
+
   -webkit-user-drag: none;
 
   touch-action: none;
@@ -254,6 +238,7 @@ body {
   top: 0;
 
   width: 0%;
+
   height: 100%;
 
   background: #777;
@@ -289,21 +274,59 @@ body {
   position: absolute;
 
   left: 50%;
-  top: 70px;
+  top: 75px;
 
   transform: translateX(-50%);
 
   background: white;
+
   border: 2px solid #333;
 
   padding: 6px 12px;
 
   font-size: 18px;
+
   font-weight: bold;
 
   white-space: nowrap;
 
-  z-index: 100;
+  z-index: 40;
 
   display: none;
+}
+
+
+/* =========================
+   飲み物ボタン
+========================= */
+
+#drink-buttons {
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 10px;
+
+  z-index: 50;
+}
+
+
+#drink-buttons button {
+  padding: 6px 10px;
+
+  border: 2px solid #333;
+
+  background: white;
+
+  cursor: pointer;
+
+  font-size: 13px;
+
+  user-select: none;
+
+  -webkit-user-select: none;
+
+  -webkit-touch-callout: none;
+
+  touch-action: none;
 }

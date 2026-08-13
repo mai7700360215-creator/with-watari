@@ -11,29 +11,48 @@
 
 <div id="game">
 
+  <!-- 壁 -->
   <div class="wall"></div>
+
+  <!-- 床 -->
   <div class="floor"></div>
 
+
+  <!-- テーブル -->
   <img src="images/table.png" class="table">
 
+
+  <!-- 椅子 -->
   <img src="images/chair.png" class="chair chair-left">
   <img src="images/chair.png" class="chair chair-right">
 
+
+  <!-- キャラクター -->
   <img src="images/watari.png" class="character watari">
   <img src="images/l.png" class="character l">
 
+
+  <!-- カップ -->
   <img id="cup" class="cup" src="images/cup.png">
+
+
+  <!-- ワタリのメッセージ -->
+  <div id="message">
+    ワタリ「Lにコーヒーをお願いいたします。」
+  </div>
+
 
   <!-- 注ぐ量のバー -->
   <div id="pour-bar">
 
-    <!-- 3秒の目印 -->
+    <!-- 3秒地点 -->
     <div id="just-line"></div>
 
-    <!-- 実際に伸びる部分 -->
+    <!-- 注いだ量 -->
     <div id="pour-progress"></div>
 
   </div>
+
 
   <!-- 判定結果 -->
   <div id="result"></div>
@@ -41,11 +60,7 @@
 </div>
 
 
-<div id="message">
-  ワタリ「Lにコーヒーをお願いいたします。」
-</div>
-
-
+<!-- 飲み物ボタン -->
 <div id="drink-buttons">
 
   <button
@@ -58,6 +73,7 @@
     緑茶
   </button>
 
+
   <button
     onmousedown="startPouring('coffee')"
     onmouseup="stopPouring()"
@@ -67,6 +83,7 @@
   >
     コーヒー
   </button>
+
 
   <button
     onmousedown="startPouring('black_tea')"

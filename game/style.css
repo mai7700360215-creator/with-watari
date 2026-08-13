@@ -324,13 +324,17 @@ body {
   touch-action: none;
 }
 /* ワタリ */
-
 .watari {
+  position: absolute !important;
   left: 80px !important;
-  bottom: 80px;
+  right: auto !important;
+  bottom: 80px !important;
 }
 
+/* L */
 .l {
+  position: absolute !important;
+  left: auto !important;
   right: 80px !important;
-  bottom: 80px;
+  bottom: 80px !important;
 }

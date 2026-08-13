@@ -1,7 +1,3 @@
-/* =========================
-   全体
-========================= */
-
 body {
   margin: 0;
   background: #222;
@@ -11,89 +7,55 @@ body {
   min-height: 100vh;
 }
 
-
-/* =========================
-   ゲーム画面
-========================= */
-
 #game {
   position: relative;
   width: 500px;
   height: 320px;
   overflow: hidden;
-
-  /* ドット絵をぼかさない */
   image-rendering: pixelated;
 }
 
-
-/* =========================
-   壁
-========================= */
-
+/* 壁 */
 .wall {
   position: absolute;
   top: 0;
   left: 0;
-
   width: 100%;
   height: 200px;
 
   background-image: url("images/br_wall.png");
   background-repeat: repeat;
-
-  /* 500pxの素材を小さくする */
   background-size: 100px 100px;
-
-  image-rendering: pixelated;
 }
 
-
-/* =========================
-   床
-========================= */
-
+/* 床 */
 .floor {
   position: absolute;
   left: 0;
   bottom: 0;
-
   width: 100%;
   height: 120px;
 
   background-image: url("images/floor.png");
   background-repeat: repeat;
-
   background-size: 100px 100px;
-
-  image-rendering: pixelated;
 }
 
-
-/* =========================
-   キャラクター
-========================= */
-
+/* キャラクター */
 .character {
   position: absolute;
-
   width: 48px;
   height: 64px;
-
   image-rendering: pixelated;
 }
 
-
 /* ワタリ */
-
 .watari {
   left: 150px;
   bottom: 80px;
 }
 
-
 /* L */
-
 .l {
   right: 150px;
   bottom: 80px;

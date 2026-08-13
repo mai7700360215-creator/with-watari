@@ -136,7 +136,7 @@ body {
 #message {
   position: absolute;
 
-  top: 15px;
+  top: 45px;
   left: 50%;
 
   transform: translateX(-50%);
@@ -289,22 +289,29 @@ body {
   position: absolute;
 
   left: 50%;
-  top: 105px;
+  top: 95px;
 
   transform: translateX(-50%);
 
-  background: white;
+  background: none;
+  border: none;
 
-  border: 2px solid #333;
+  padding: 0;
 
-  padding: 8px 16px;
+  color: white;
 
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
 
   white-space: nowrap;
 
-  z-index: 50;
+  z-index: 100;
 
   display: none;
+
+  text-shadow:
+    2px 2px 0 #333,
+    -1px -1px 0 #333,
+    1px -1px 0 #333,
+    -1px 1px 0 #333;
 }

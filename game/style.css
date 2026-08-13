@@ -217,3 +217,35 @@ body {
   -webkit-user-select: none;
   -webkit-user-drag: none;
 }
+/* =========================
+   注ぐ量のバー
+========================= */
+
+#pour-bar {
+  position: absolute;
+
+  left: 50%;
+  bottom: 55px;
+
+  transform: translateX(-50%);
+
+  width: 240px;
+  height: 14px;
+
+  background: white;
+  border: 2px solid #333;
+
+  z-index: 10;
+
+  overflow: hidden;
+}
+
+
+#pour-progress {
+  width: 0%;
+  height: 100%;
+
+  background: #888;
+
+  transition: width 0.05s linear;
+}

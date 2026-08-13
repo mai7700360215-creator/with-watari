@@ -1,10 +1,13 @@
 // 選択中の飲み物
 let selectedDrink = null;
 
-// 長押しタイマー
-let pourTimer = null;
+// 注ぎ始めた時間
+let pourStartTime = null;
 
-// すでに完成したか
+// バー更新用
+let pourAnimation = null;
+
+// 完成したか
 let isFinished = false;
 
 
@@ -18,28 +21,55 @@ function startPouring(drink) {
 
   const cup = document.getElementById("cup");
 
-  // 新しく注ぎ始めるので空にする
+  // 空のカップにする
   cup.src = "images/cup.png";
   cup.style.display = "block";
 
+  // 最初からやり直す
   isFinished = false;
 
-  // 前のタイマーを解除
-  if (pourTimer !== null) {
-    clearTimeout(pourTimer);
+  // 注ぎ始めた時間
+  pourStartTime = Date.now();
+
+  // バーを0に戻す
+  updatePourBar();
+
+}
+
+
+// =========================
+// バーを更新
+// =========================
+
+function updatePourBar() {
+
+  if (pourStartTime === null) return;
+
+  const elapsed = Date.now() - pourStartTime;
+
+  // 5秒で100%
+  let percent = (elapsed / 5000) * 100;
+
+  // 100%を超えない
+  if (percent > 100) {
+    percent = 100;
   }
 
-  // 3秒長押し
-  pourTimer = setTimeout(function() {
+  const progress = document.getElementById("pour-progress");
 
-    cup.src = "images/" + selectedDrink + ".png";
+  progress.style.width = percent + "%";
 
-    // 完成したことを記録
-    isFinished = true;
 
-    pourTimer = null;
+  // まだ5秒経っていなければ続ける
+  if (elapsed < 5000) {
 
-  }, 3000);
+    pourAnimation = requestAnimationFrame(updatePourBar);
+
+  } else {
+
+    pourAnimation = null;
+
+  }
 }
 
 
@@ -49,14 +79,28 @@ function startPouring(drink) {
 
 function stopPouring() {
 
-  // すでに完成しているなら何もしない
-  if (isFinished) {
-    return;
+  if (pourStartTime === null) return;
+
+  // バー更新を止める
+  if (pourAnimation !== null) {
+    cancelAnimationFrame(pourAnimation);
+    pourAnimation = null;
   }
 
-  // 3秒前ならキャンセル
-  if (pourTimer !== null) {
-    clearTimeout(pourTimer);
-    pourTimer = null;
+
+  const elapsed = Date.now() - pourStartTime;
+
+
+  // 5秒以内なら飲み物を完成
+  if (elapsed > 0) {
+
+    const cup = document.getElementById("cup");
+
+    cup.src = "images/" + selectedDrink + ".png";
+
   }
+
+
+  // リセット
+  pourStartTime = null;
 }

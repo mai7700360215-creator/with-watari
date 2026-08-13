@@ -25,15 +25,18 @@ function startPouring(drink) {
   cup.src = "images/cup.png";
   cup.style.display = "block";
 
-  // 最初からやり直す
+  // 新しく開始
   isFinished = false;
 
   // 注ぎ始めた時間
   pourStartTime = Date.now();
 
   // バーを0に戻す
-  updatePourBar();
+  const progress = document.getElementById("pour-progress");
+  progress.style.width = "0%";
 
+  // バーを動かす
+  updatePourBar();
 }
 
 
@@ -43,7 +46,9 @@ function startPouring(drink) {
 
 function updatePourBar() {
 
-  if (pourStartTime === null) return;
+  if (pourStartTime === null) {
+    return;
+  }
 
   const elapsed = Date.now() - pourStartTime;
 
@@ -60,7 +65,7 @@ function updatePourBar() {
   progress.style.width = percent + "%";
 
 
-  // まだ5秒経っていなければ続ける
+  // 5秒未満なら更新を続ける
   if (elapsed < 5000) {
 
     pourAnimation = requestAnimationFrame(updatePourBar);
@@ -68,7 +73,6 @@ function updatePourBar() {
   } else {
 
     pourAnimation = null;
-
   }
 }
 
@@ -79,28 +83,35 @@ function updatePourBar() {
 
 function stopPouring() {
 
-  if (pourStartTime === null) return;
+  if (pourStartTime === null) {
+    return;
+  }
+
 
   // バー更新を止める
   if (pourAnimation !== null) {
+
     cancelAnimationFrame(pourAnimation);
+
     pourAnimation = null;
   }
 
 
+  // 注いだ時間
   const elapsed = Date.now() - pourStartTime;
 
 
-  // 5秒以内なら飲み物を完成
+  // 飲み物を入れる
   if (elapsed > 0) {
 
     const cup = document.getElementById("cup");
 
     cup.src = "images/" + selectedDrink + ".png";
 
+    isFinished = true;
   }
 
 
-  // リセット
+  // 注ぐ時間をリセット
   pourStartTime = null;
 }

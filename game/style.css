@@ -205,5 +205,11 @@ body {
 
   cursor: pointer;
 
+  /* スマホのタッチ操作を優先 */
   touch-action: none;
+
+  /* 画像をドラッグしない */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
 }

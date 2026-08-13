@@ -26,15 +26,18 @@
 
 </div>
 
+
 <div id="message">
   ワタリ「Lにコーヒーをお願いいたします。」
 </div>
 
+
 <div id="drink-buttons">
+
   <button
-    onclick="chooseDrink('green_tea')"
     onmousedown="startPouring('green_tea')"
     onmouseup="stopPouring()"
+    onmouseleave="stopPouring()"
     ontouchstart="startPouring('green_tea')"
     ontouchend="stopPouring()"
   >
@@ -42,9 +45,9 @@
   </button>
 
   <button
-    onclick="chooseDrink('coffee')"
     onmousedown="startPouring('coffee')"
     onmouseup="stopPouring()"
+    onmouseleave="stopPouring()"
     ontouchstart="startPouring('coffee')"
     ontouchend="stopPouring()"
   >
@@ -52,15 +55,17 @@
   </button>
 
   <button
-    onclick="chooseDrink('black_tea')"
     onmousedown="startPouring('black_tea')"
     onmouseup="stopPouring()"
+    onmouseleave="stopPouring()"
     ontouchstart="startPouring('black_tea')"
     ontouchend="stopPouring()"
   >
     紅茶
   </button>
+
 </div>
+
 
 <script src="game.js"></script>
 

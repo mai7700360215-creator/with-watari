@@ -1,17 +1,27 @@
 body {
   margin: 0;
   background: #222;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   min-height: 100vh;
 }
 
+
+/* =========================
+   ゲーム画面
+========================= */
+
 #game {
   position: relative;
+
   width: 500px;
   height: 320px;
+
   overflow: hidden;
+
   image-rendering: pixelated;
 }
 
@@ -22,6 +32,7 @@ body {
 
 .wall {
   position: absolute;
+
   top: 0;
   left: 0;
 
@@ -40,6 +51,7 @@ body {
 
 .floor {
   position: absolute;
+
   left: 0;
   bottom: 0;
 
@@ -142,7 +154,7 @@ body {
 
 
 /* =========================
-   飲み物の3択
+   飲み物ボタン
 ========================= */
 
 #drink-buttons {
@@ -207,7 +219,7 @@ body {
 
 
 /* =========================
-   注ぐ量のバー
+   注ぐ量バー
 ========================= */
 
 #pour-bar {
@@ -230,21 +242,31 @@ body {
   display: block;
 }
 
+
+/* =========================
+   注いだ量
+========================= */
+
 #pour-progress {
-  width: 0;
+  position: absolute;
+
+  left: 0;
+  top: 0;
+
+  width: 0%;
   height: 100%;
 
   background: #777;
 
-  display: block;
+  z-index: 1;
 }
+
+
 /* =========================
-   ジャストの目印
+   3秒の目印
 ========================= */
 
-#pour-bar::after {
-  content: "";
-
+#just-line {
   position: absolute;
 
   left: 60%;
@@ -253,5 +275,36 @@ body {
   width: 3px;
   height: 20px;
 
-  background: #333;
+  background: #000;
+
+  z-index: 5;
+}
+
+
+/* =========================
+   判定結果
+========================= */
+
+#result {
+  position: absolute;
+
+  left: 50%;
+  top: 105px;
+
+  transform: translateX(-50%);
+
+  background: white;
+
+  border: 2px solid #333;
+
+  padding: 8px 16px;
+
+  font-size: 18px;
+  font-weight: bold;
+
+  white-space: nowrap;
+
+  z-index: 50;
+
+  display: none;
 }

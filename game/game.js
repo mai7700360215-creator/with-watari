@@ -1,14 +1,11 @@
-// 選んだ飲み物
+// 選択中の飲み物
 let selectedDrink = null;
 
 // 長押しタイマー
 let pourTimer = null;
 
 
-// =========================
-// 飲み物を選ぶ
-// =========================
-
+// 飲み物を選択
 function chooseDrink(drink) {
   selectedDrink = drink;
 
@@ -20,13 +17,10 @@ function chooseDrink(drink) {
 }
 
 
-// =========================
-// 注ぎ始める
-// =========================
-
+// 長押し開始
 function startPouring(drink) {
 
-  // どの飲み物を注ぐか決定
+  // 飲み物を記憶
   selectedDrink = drink;
 
   const cup = document.getElementById("cup");
@@ -35,13 +29,15 @@ function startPouring(drink) {
   cup.src = "images/cup.png";
   cup.style.display = "block";
 
-  // すでにタイマーがあれば止める
+
+  // 以前のタイマーを消す
   if (pourTimer !== null) {
     clearTimeout(pourTimer);
   }
 
-  // 3秒長押し
-  pourTimer = setTimeout(function () {
+
+  // 3秒後に完成
+  pourTimer = setTimeout(function() {
 
     cup.src = "images/" + selectedDrink + ".png";
 
@@ -51,10 +47,7 @@ function startPouring(drink) {
 }
 
 
-// =========================
-// 注ぐのをやめる
-// =========================
-
+// 指・マウスを離した
 function stopPouring() {
 
   if (pourTimer !== null) {
@@ -62,41 +55,3 @@ function stopPouring() {
     pourTimer = null;
   }
 }
-
-
-// =========================
-// ボタンを設定
-// =========================
-
-const buttons = document.querySelectorAll("#drink-buttons button");
-
-buttons.forEach(function(button) {
-
-  // ボタンに設定されている飲み物を取得
-  const drink = button.dataset.drink;
-
-
-  // PC：押し始める
-  button.addEventListener("mousedown", function() {
-    startPouring(drink);
-  });
-
-  // PC：離す
-  button.addEventListener("mouseup", stopPouring);
-
-  button.addEventListener("mouseleave", stopPouring);
-
-
-  // スマホ：押し始める
-  button.addEventListener("touchstart", function(event) {
-    event.preventDefault();
-    startPouring(drink);
-  });
-
-  // スマホ：離す
-  button.addEventListener("touchend", function(event) {
-    event.preventDefault();
-    stopPouring();
-  });
-
-});

@@ -31,9 +31,35 @@
 </div>
 
 <div id="drink-buttons">
-<button data-drink="green_tea">緑茶</button>
-<button data-drink="coffee">コーヒー</button>
-<button data-drink="black_tea">紅茶</button>
+  <button
+    onclick="chooseDrink('green_tea')"
+    onmousedown="startPouring('green_tea')"
+    onmouseup="stopPouring()"
+    ontouchstart="startPouring('green_tea')"
+    ontouchend="stopPouring()"
+  >
+    緑茶
+  </button>
+
+  <button
+    onclick="chooseDrink('coffee')"
+    onmousedown="startPouring('coffee')"
+    onmouseup="stopPouring()"
+    ontouchstart="startPouring('coffee')"
+    ontouchend="stopPouring()"
+  >
+    コーヒー
+  </button>
+
+  <button
+    onclick="chooseDrink('black_tea')"
+    onmousedown="startPouring('black_tea')"
+    onmouseup="stopPouring()"
+    ontouchstart="startPouring('black_tea')"
+    ontouchend="stopPouring()"
+  >
+    紅茶
+  </button>
 </div>
 
 <script src="game.js"></script>

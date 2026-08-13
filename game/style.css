@@ -326,15 +326,15 @@ body {
 /* ワタリ */
 .watari {
   position: absolute !important;
-  left: 80px !important;
+  left: 140px !important;
   right: auto !important;
-  bottom: 80px !important;
+  bottom: 140px !important;
 }
 
 /* L */
 .l {
   position: absolute !important;
   left: auto !important;
-  right: 80px !important;
-  bottom: 80px !important;
+  right: 140px !important;
+  bottom: 140px !important;
 }

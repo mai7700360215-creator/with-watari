@@ -102,14 +102,38 @@ function stopPouring() {
 
 
   // 飲み物を入れる
-  if (elapsed > 0) {
+if (elapsed > 0) {
 
-    const cup = document.getElementById("cup");
+  const cup = document.getElementById("cup");
 
-    cup.src = "images/" + selectedDrink + ".png";
+  cup.src = "images/" + selectedDrink + ".png";
 
-    isFinished = true;
+  isFinished = true;
+
+
+  // =========================
+  // 判定
+  // =========================
+
+  const seconds = elapsed / 1000;
+
+  if (seconds < 2.5) {
+
+    console.log("少なすぎます");
+
+  } else if (seconds <= 3.5) {
+
+    console.log("ぴったりです！");
+
+  } else if (seconds < 5) {
+
+    console.log("多いです");
+
+  } else {
+
+    console.log("入れすぎです");
   }
+}
 
 
   // 注ぐ時間をリセット

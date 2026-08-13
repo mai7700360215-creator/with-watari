@@ -238,3 +238,20 @@ body {
 
   display: block;
 }
+/* =========================
+   ジャストの目印
+========================= */
+
+#pour-bar::after {
+  content: "";
+
+  position: absolute;
+
+  left: 60%;
+  top: -2px;
+
+  width: 3px;
+  height: 20px;
+
+  background: #333;
+}

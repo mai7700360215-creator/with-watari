@@ -142,18 +142,14 @@ body {
 /* ワタリ */
 
 .watari {
-  left: 105px;
+  left: 200px;
   bottom: 80px;
 }
-
-
-/* L */
 
 .l {
-  right: 105px;
+  right: 200px;
   bottom: 80px;
 }
-
 
 /* =========================
    ワタリのメッセージ

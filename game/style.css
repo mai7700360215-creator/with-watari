@@ -334,3 +334,10 @@ body {
 
   touch-action: none;
 }
+.watari {
+  left: 200px !important;
+}
+
+.l {
+  right: 200px !important;
+}

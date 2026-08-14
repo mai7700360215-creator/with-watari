@@ -71,7 +71,6 @@ body {
   background-size: 100px 100px;
 }
 
-
 /* =========================
    テーブル
 ========================= */
@@ -80,7 +79,7 @@ body {
   position: absolute;
 
   width: 120px;
-  height: 80px;
+  height: 100px;
 
   left: 190px;
   bottom: 100px;
@@ -98,8 +97,8 @@ body {
 .chair {
   position: absolute;
 
-  width: 48px;
-  height: 48px;
+  width: 70px;
+  height: 80px;
 
   image-rendering: pixelated;
 
@@ -107,19 +106,21 @@ body {
 }
 
 
-/* 左の椅子 */
+/* 左の椅子
+   ワタリの後ろ */
 
 .chair-left {
-  left: 130px;
-  bottom: 100px;
+  left: 95px;
+  bottom: 80px;
 }
 
 
-/* 右の椅子 */
+/* 右の椅子
+   Lの真後ろ */
 
 .chair-right {
-  right: 130px;
-  bottom: 100px;
+  right: 95px;
+  bottom: 80px;
 }
 
 
@@ -335,6 +336,7 @@ body {
 .l {
   position: absolute !important;
   left: auto !important;
-  right: 80px !important;
+  right: 105px !important;
   bottom: 80px !important;
 }
+

@@ -123,17 +123,22 @@ body {
    テーブル
    今のテーブル画像を仮使用
 ========================= */
+/* =========================
+   テーブル
+========================= */
+
 .table {
   position: absolute;
 
-  width: 120px;
-  height: 100px;
+  width: 70px;
+  height: 63px;
 
   image-rendering: pixelated;
 
   z-index: 2;
-}
 
+  object-fit: contain;
+}
 
 /* 4-1 */
 .table-1 {

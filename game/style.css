@@ -123,7 +123,6 @@ body {
    テーブル
    今のテーブル画像を仮使用
 ========================= */
-
 .table {
   position: absolute;
 
@@ -137,74 +136,30 @@ body {
 
 
 /* 4-1 */
-
 .table-1 {
-  left: 0;
+  left: 0%;
   top: 120px;
 }
 
 
 /* 11-2 */
-
 .table-2 {
-  left: 40px;
+  left: 8.33%;
   top: 400px;
 }
 
 
 /* 6-6 */
-
 .table-3 {
-  left: 200px;
+  left: 41.67%;
   top: 200px;
 }
 
 
 /* 11-10 */
-
 .table-4 {
-  left: 360px;
+  left: 75%;
   top: 400px;
-}
-
-
-/* =========================
-   椅子
-========================= */
-
-.chair {
-  position: absolute;
-
-  width: 70px;
-  height: 80px;
-
-  image-rendering: pixelated;
-
-  z-index: 2;
-}
-
-
-/* Lの後ろ */
-
-.chair-right {
-  right: 95px;
-  bottom: 80px;
-}
-
-
-/* =========================
-   キャラクター
-========================= */
-
-.character {
-  position: absolute;
-
-  width: 48px;
-  height: 64px;
-
-  image-rendering: pixelated;
-
-  z-index: 5;
 }
 
 
@@ -216,12 +171,10 @@ body {
 .watari {
   position: absolute !important;
 
-  left: 40px !important;
-
+  left: 8.33% !important;
   right: auto !important;
 
   top: 280px !important;
-
   bottom: auto !important;
 
   z-index: 5;
@@ -236,12 +189,10 @@ body {
 .l {
   position: absolute !important;
 
-  left: 360px !important;
-
+  left: 75% !important;
   right: auto !important;
 
   top: 360px !important;
-
   bottom: auto !important;
 
   z-index: 5;
@@ -251,13 +202,12 @@ body {
 /* =========================
    松田
    4-6
-   仮でL画像を使用
 ========================= */
 
 .matsuda {
   position: absolute;
 
-  left: 200px;
+  left: 41.67%;
 
   top: 120px;
 
@@ -273,13 +223,12 @@ body {
 /* =========================
    模木
    6-8
-   仮でL画像を使用
 ========================= */
 
 .mogi {
   position: absolute;
 
-  left: 280px;
+  left: 58.33%;
 
   top: 200px;
 
@@ -290,7 +239,6 @@ body {
 
   z-index: 5;
 }
-
 
 /* =========================
    ワタリのメッセージ

@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -11,6 +12,10 @@
 
 <div id="game">
 
+  <!-- =========================
+       ゲーム画面
+  ========================== -->
+
   <!-- 壁 -->
   <div class="wall"></div>
 
@@ -18,27 +23,98 @@
   <div class="floor"></div>
 
 
-<img src="images/te-buru.png" class="table">
+  <!-- =========================
+       家具
+       今は全部 te-buru.png で仮置き
+  ========================== -->
 
-<img src="images/isu.png" class="chair chair-right">
+  <!-- 長方形テーブル1：4-1 -->
+  <img src="images/te-buru.png"
+       class="table table-1">
+
+  <!-- 長方形テーブル2：11-2 -->
+  <img src="images/te-buru.png"
+       class="table table-2">
+
+  <!-- 正方形テーブル3：6-6 -->
+  <img src="images/te-buru.png"
+       class="table table-3">
+
+  <!-- PCデスク：11-10 -->
+  <img src="images/te-buru.png"
+       class="table table-4">
 
 
-  <!-- キャラクター -->
-<img src="images/ミニキャラピクセルワタリ.png" class="character watari">
-<img src="images/ミニキャラピクセルL.png" class="character l">
+  <!-- =========================
+       椅子
+       今は同じ isu.png で仮置き
+  ========================== -->
+
+  <!-- ワタリ用 -->
+  <img src="images/isu.png"
+       class="chair chair-watari">
+
+  <!-- L用 -->
+  <img src="images/isu.png"
+       class="chair chair-l">
+
+  <!-- 松田用 -->
+  <img src="images/isu.png"
+       class="chair chair-matsuda">
+
+  <!-- 模木用 -->
+  <img src="images/isu.png"
+       class="chair chair-mogi">
 
 
-  <!-- カップ -->
-  <img id="cup" class="cup" src="images/cup.png">
+  <!-- =========================
+       キャラクター
+  ========================== -->
+
+  <!-- ワタリ：8-2 -->
+  <img src="images/ミニキャラピクセルワタリ.png"
+       class="character watari">
 
 
-  <!-- ワタリのメッセージ -->
+  <!-- L：10-10 -->
+  <img src="images/ミニキャラピクセルL.png"
+       class="character l">
+
+
+  <!-- 松田：4-6
+       現在はLの画像を仮使用 -->
+  <img src="images/ミニキャラピクセルL.png"
+       class="character matsuda">
+
+
+  <!-- 模木：6-8
+       現在はLの画像を仮使用 -->
+  <img src="images/ミニキャラピクセルL.png"
+       class="character mogi">
+
+
+  <!-- =========================
+       カップ
+  ========================== -->
+
+  <img id="cup"
+       class="cup"
+       src="images/cup.png">
+
+
+  <!-- =========================
+       ワタリのメッセージ
+  ========================== -->
+
   <div id="message">
     ワタリ「Lにコーヒーをお願いいたします。」
   </div>
 
 
-  <!-- 注ぐ量のバー -->
+  <!-- =========================
+       注ぐ量バー
+  ========================== -->
+
   <div id="pour-bar">
 
     <!-- 3秒地点 -->
@@ -50,20 +126,96 @@
   </div>
 
 
-  <!-- 判定結果 -->
+  <!-- =========================
+       判定結果
+  ========================== -->
+
   <div id="result"></div>
+
+
+  <!-- =========================
+       ガラケー操作エリア
+  ========================== -->
+
+  <div id="menu-area">
+
+    <!-- 注文一覧：14-2 -->
+    <button class="menu-button menu-order">
+      □
+    </button>
+
+    <!-- 料理選択：17-2 -->
+    <button class="menu-button menu-food">
+      □
+    </button>
+
+    <!-- ワタリの助言：14-11 -->
+    <button class="menu-button menu-advice">
+      □
+    </button>
+
+    <!-- 会話へ戻る：17-11 -->
+    <button class="menu-button menu-talk">
+      □
+    </button>
+
+
+    <!-- =========================
+         十字キー
+    ========================== -->
+
+    <div id="direction-pad">
+
+      <!-- ↑：13.5-6.5 -->
+      <button class="direction-button direction-up">
+        ▲
+      </button>
+
+      <!-- ←：15.5-4.5 -->
+      <button class="direction-button direction-left">
+        ◀
+      </button>
+
+      <!-- ○：15.5-6.5 -->
+      <button class="direction-center">
+        ●
+      </button>
+
+      <!-- →：15.5-8.5 -->
+      <button class="direction-button direction-right">
+        ▶
+      </button>
+
+      <!-- ↓：17.5-6.5 -->
+      <button class="direction-button direction-down">
+        ▼
+      </button>
+
+    </div>
+
+  </div>
 
 </div>
 
 
-<!-- 飲み物ボタン -->
+<!-- =========================
+     現在の飲み物ボタン
+     機能を壊さないため残す
+ ========================== -->
+
 <div id="drink-buttons">
 
-  <button data-drink="green_tea">緑茶</button>
+  <button data-drink="green_tea">
+    緑茶
+  </button>
 
-  <button data-drink="coffee">コーヒー</button>
+  <button data-drink="coffee">
+    コーヒー
+  </button>
 
-  <button data-drink="black_tea">紅茶</button>
+  <button data-drink="black_tea">
+    紅茶
+  </button>
 
 </div>
 
@@ -72,3 +224,4 @@
 
 </body>
 </html>
+```

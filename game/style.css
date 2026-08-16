@@ -17,7 +17,9 @@ body {
 
 /* =========================
    ゲーム全体
-   横12マス × 縦18マス
+   横12マス
+   縦18マス
+   1マス＝40px
 ========================= */
 
 #game {
@@ -39,6 +41,7 @@ body {
 /* =========================
    ゲーム画面
    縦1〜12
+   480px × 480px
 ========================= */
 
 .wall {
@@ -80,8 +83,32 @@ body {
 
 
 /* =========================
+   境目
+   ゲーム画面
+   ↓
+   操作画面
+========================= */
+
+#game::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 480px;
+
+  width: 480px;
+  height: 4px;
+
+  background: #777;
+
+  z-index: 100;
+}
+
+
+/* =========================
    テーブル
-   仮：今のテーブル画像を使用
+   今のテーブル画像を仮使用
 ========================= */
 
 .table {
@@ -96,21 +123,15 @@ body {
 }
 
 
-/*
-  長方形テーブル1
-  4-1
-*/
+/* 4-1 */
 
 .table-1 {
-  left: 0px;
+  left: 0;
   top: 120px;
 }
 
 
-/*
-  長方形テーブル2
-  11-2
-*/
+/* 11-2 */
 
 .table-2 {
   left: 40px;
@@ -118,12 +139,7 @@ body {
 }
 
 
-/*
-  正方形テーブル3
-  6-6
-
-  仮なので同じテーブル画像を使用
-*/
+/* 6-6 */
 
 .table-3 {
   left: 200px;
@@ -131,12 +147,7 @@ body {
 }
 
 
-/*
-  PCデスク
-  11-10
-
-  仮なので同じテーブル画像を使用
-*/
+/* 11-10 */
 
 .table-4 {
   left: 360px;
@@ -160,8 +171,16 @@ body {
 }
 
 
+/* Lの後ろ */
+
+.chair-right {
+  right: 95px;
+  bottom: 80px;
+}
+
+
 /* =========================
-   キャラクター共通
+   キャラクター
 ========================= */
 
 .character {
@@ -172,7 +191,7 @@ body {
 
   image-rendering: pixelated;
 
-  z-index: 3;
+  z-index: 5;
 }
 
 
@@ -219,7 +238,7 @@ body {
 /* =========================
    松田
    4-6
-   仮：Lのドット絵
+   仮でL画像を使用
 ========================= */
 
 .matsuda {
@@ -241,7 +260,7 @@ body {
 /* =========================
    模木
    6-8
-   仮：Lのドット絵
+   仮でL画像を使用
 ========================= */
 
 .mogi {
@@ -317,6 +336,7 @@ body {
 
 /* =========================
    注ぐ量バー
+   現在の機能を維持
 ========================= */
 
 #pour-bar {
@@ -406,52 +426,31 @@ body {
 
 
 /* =========================
-   ガラケー操作エリア
-   縦13〜18
+   既存の飲み物ボタン
+   機能を壊さないため残す
 ========================= */
 
 #drink-buttons {
-  position: absolute;
+  display: flex;
 
-  left: 0;
-  top: 480px;
+  gap: 8px;
 
-  width: 480px;
-  height: 240px;
-
-  margin: 0;
-
-  display: block;
+  margin-top: 10px;
 
   z-index: 50;
-
-  border-top: 3px solid #555;
-
-  box-sizing: border-box;
 }
 
 
-/* =========================
-   メニューボタン
-========================= */
-
 #drink-buttons button {
-  position: absolute;
+  padding: 6px 10px;
 
-  width: 120px;
-  height: 40px;
+  border: 2px solid #333;
 
-  padding: 0;
-
-  border: 2px solid #777;
-
-  background: #333;
-
-  color: white;
+  background: white;
 
   cursor: pointer;
 
-  font-size: 0;
+  font-size: 13px;
 
   user-select: none;
 
@@ -464,44 +463,76 @@ body {
 
 
 /* =========================
-   注文一覧
-   14-2
+   将来のガラケーメニューボタン
+   HTMLを追加したとき用
 ========================= */
 
-#drink-buttons button:nth-child(1) {
+#menu-area {
+  position: absolute;
+
+  left: 0;
+  top: 480px;
+
+  width: 480px;
+  height: 240px;
+
+  z-index: 50;
+}
+
+
+.menu-button {
+  position: absolute;
+
+  width: 80px;
+  height: 40px;
+
+  border: 2px solid #777;
+
+  background: #333;
+
+  color: white;
+
+  font-size: 0;
+
+  box-sizing: border-box;
+
+  user-select: none;
+
+  -webkit-user-select: none;
+
+  -webkit-touch-callout: none;
+
+  touch-action: none;
+}
+
+
+/* 注文一覧 14-2 */
+
+.menu-order {
   left: 40px;
   top: 40px;
 }
 
 
-/* =========================
-   料理選択
-   17-2
-========================= */
+/* 料理選択 17-2 */
 
-#drink-buttons button:nth-child(2) {
+.menu-food {
   left: 40px;
   top: 160px;
 }
 
 
-/* =========================
-   ワタリの助言
-   14-11
-========================= */
+/* ワタリの助言 14-11 */
 
-#drink-buttons button:nth-child(3) {
+.menu-advice {
   left: 360px;
   top: 40px;
 }
 
 
-/* =========================
-   会話へ戻る
-   17-11
-========================= */
+/* 会話へ戻る 17-11 */
 
-#drink-buttons button:nth-child(4) {
+.menu-talk {
   left: 360px;
   top: 160px;
 }
@@ -526,9 +557,7 @@ body {
 }
 
 
-/* =========================
-   十字キー共通
-========================= */
+/* 共通 */
 
 .direction-button {
   position: absolute;
@@ -554,10 +583,7 @@ body {
 }
 
 
-/* =========================
-   上
-   13.5-6.5
-========================= */
+/* ↑ 13.5-6.5 */
 
 .direction-up {
   left: 240px;
@@ -565,10 +591,7 @@ body {
 }
 
 
-/* =========================
-   右
-   15.5-8.5
-========================= */
+/* → 15.5-8.5 */
 
 .direction-right {
   left: 320px;
@@ -576,10 +599,7 @@ body {
 }
 
 
-/* =========================
-   下
-   17.5-6.5
-========================= */
+/* ↓ 17.5-6.5 */
 
 .direction-down {
   left: 240px;
@@ -587,10 +607,7 @@ body {
 }
 
 
-/* =========================
-   左
-   15.5-4.5
-========================= */
+/* ← 15.5-4.5 */
 
 .direction-left {
   left: 160px;
@@ -598,10 +615,7 @@ body {
 }
 
 
-/* =========================
-   決定
-   15.5-6.5
-========================= */
+/* ○ 15.5-6.5 */
 
 .direction-center {
   position: absolute;
@@ -630,4 +644,4 @@ body {
 
   touch-action: none;
 }
-
+```
